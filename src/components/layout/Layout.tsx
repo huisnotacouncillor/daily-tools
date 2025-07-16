@@ -1,19 +1,27 @@
 import { Outlet, Link, useLocation } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { Code, Braces, Palette, Key, Menu, X } from "lucide-react";
+import {
+  Code,
+  SquareCode,
+  FileJson,
+  Palette,
+  KeySquare,
+  Menu,
+  X,
+} from "lucide-react";
 import { useState, useEffect } from "react";
 
 const navigationItems = [
   {
     name: "Regex Validator",
     path: "/regex",
-    icon: Code,
+    icon: SquareCode,
     description: "Test and validate regular expressions",
   },
   {
     name: "JSON Formatter",
     path: "/json",
-    icon: Braces,
+    icon: FileJson,
     description: "Format and validate JSON data",
   },
   {
@@ -25,7 +33,7 @@ const navigationItems = [
   {
     name: "JWT Decoder",
     path: "/jwt",
-    icon: Key,
+    icon: KeySquare,
     description: "Decode and inspect JWT tokens",
   },
 ];
