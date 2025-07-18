@@ -37,16 +37,16 @@ export function decodeJwt(token: string): {
   error?: string;
 } {
   if (!token) {
-    return { isValid: false, error: "Token is empty" };
+    return { isValid: false, error: 'Token is empty' };
   }
 
   // Check if the token has the correct format (three parts separated by dots)
-  const parts = token.split(".");
+  const parts = token.split('.');
   if (parts.length !== 3) {
     return {
       isValid: false,
       error:
-        "Invalid token format. JWT should have three parts separated by dots.",
+        'Invalid token format. JWT should have three parts separated by dots.',
     };
   }
 
@@ -71,7 +71,7 @@ export function decodeJwt(token: string): {
   } catch (error) {
     return {
       isValid: false,
-      error: error instanceof Error ? error.message : "Failed to decode token",
+      error: error instanceof Error ? error.message : 'Failed to decode token',
     };
   }
 }
@@ -111,7 +111,7 @@ export function isTokenNotYetValid(payload: JwtPayload): boolean {
  */
 export function formatTimestamp(timestamp: number): string {
   if (!timestamp) {
-    return "N/A";
+    return 'N/A';
   }
 
   // Convert seconds to milliseconds
@@ -127,14 +127,14 @@ export function formatTimestamp(timestamp: number): string {
  */
 export function getTimeRemaining(payload: JwtPayload): string {
   if (!payload.exp) {
-    return "No expiration";
+    return 'No expiration';
   }
 
   const currentTime = Math.floor(Date.now() / 1000);
   const remainingSeconds = payload.exp - currentTime;
 
   if (remainingSeconds <= 0) {
-    return "Expired";
+    return 'Expired';
   }
 
   // Format the remaining time
@@ -156,14 +156,14 @@ export function getTimeRemaining(payload: JwtPayload): string {
  */
 export function getTokenAge(payload: JwtPayload): string {
   if (!payload.iat) {
-    return "Unknown";
+    return 'Unknown';
   }
 
   const currentTime = Math.floor(Date.now() / 1000);
   const ageSeconds = currentTime - payload.iat;
 
   if (ageSeconds <= 0) {
-    return "Just issued";
+    return 'Just issued';
   }
 
   // Format the age
@@ -185,19 +185,19 @@ export function getTokenAge(payload: JwtPayload): string {
  */
 export function getAlgorithmDescription(alg: string): string {
   const algorithms: Record<string, string> = {
-    HS256: "HMAC with SHA-256",
-    HS384: "HMAC with SHA-384",
-    HS512: "HMAC with SHA-512",
-    RS256: "RSA Signature with SHA-256",
-    RS384: "RSA Signature with SHA-384",
-    RS512: "RSA Signature with SHA-512",
-    ES256: "ECDSA Signature with SHA-256",
-    ES384: "ECDSA Signature with SHA-384",
-    ES512: "ECDSA Signature with SHA-512",
-    PS256: "RSASSA-PSS with SHA-256",
-    PS384: "RSASSA-PSS with SHA-384",
-    PS512: "RSASSA-PSS with SHA-512",
-    none: "No digital signature or MAC",
+    HS256: 'HMAC with SHA-256',
+    HS384: 'HMAC with SHA-384',
+    HS512: 'HMAC with SHA-512',
+    RS256: 'RSA Signature with SHA-256',
+    RS384: 'RSA Signature with SHA-384',
+    RS512: 'RSA Signature with SHA-512',
+    ES256: 'ECDSA Signature with SHA-256',
+    ES384: 'ECDSA Signature with SHA-384',
+    ES512: 'ECDSA Signature with SHA-512',
+    PS256: 'RSASSA-PSS with SHA-256',
+    PS384: 'RSASSA-PSS with SHA-384',
+    PS512: 'RSASSA-PSS with SHA-512',
+    none: 'No digital signature or MAC',
   };
 
   return algorithms[alg] || `Unknown algorithm: ${alg}`;
@@ -211,16 +211,16 @@ export function generateSampleJwt(): string {
   // This is a static sample token with a header and payload
   // It's not a valid token (signature is fake) and should only be used for demonstration
   const header = {
-    alg: "HS256",
-    typ: "JWT",
+    alg: 'HS256',
+    typ: 'JWT',
   };
 
   const currentTime = Math.floor(Date.now() / 1000);
 
   const payload = {
-    sub: "1234567890",
-    name: "John Doe",
-    email: "john.doe@example.com",
+    sub: '1234567890',
+    name: 'John Doe',
+    email: 'john.doe@example.com',
     admin: true,
     iat: currentTime,
     exp: currentTime + 3600, // Expires in 1 hour
@@ -228,7 +228,7 @@ export function generateSampleJwt(): string {
 
   const encodedHeader = btoa(JSON.stringify(header));
   const encodedPayload = btoa(JSON.stringify(payload));
-  const fakeSig = "SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c"; // Not a real signature
+  const fakeSig = 'SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c'; // Not a real signature
 
   return `${encodedHeader}.${encodedPayload}.${fakeSig}`;
 }

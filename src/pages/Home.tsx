@@ -1,12 +1,12 @@
-import { Link } from "react-router-dom";
+import { Link } from 'react-router-dom';
 import {
   Card,
   CardContent,
   CardDescription,
   CardHeader,
   CardTitle,
-} from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
+} from '@/components/ui/card';
+import { Badge } from '@/components/ui/badge';
 import {
   Code,
   Braces,
@@ -17,67 +17,67 @@ import {
   Zap,
   Shield,
   Rocket,
-} from "lucide-react";
+} from 'lucide-react';
 
 const tools = [
   {
-    name: "Regular Expression Validator",
-    path: "/regex",
+    name: 'Regular Expression Validator',
+    path: '/regex',
     icon: Code,
     description:
-      "Test and validate regular expressions with real-time matching and visual explanations.",
+      'Test and validate regular expressions with real-time matching and visual explanations.',
     features: [
-      "Pattern testing",
-      "Match highlighting",
-      "Regex explanation",
-      "Tutorial reference",
+      'Pattern testing',
+      'Match highlighting',
+      'Regex explanation',
+      'Tutorial reference',
     ],
-    color: "from-blue-500 to-cyan-500",
-    badge: "Popular",
+    color: 'from-blue-500 to-cyan-500',
+    badge: 'Popular',
   },
   {
-    name: "JSON Parser & Formatter",
-    path: "/json",
+    name: 'JSON Parser & Formatter',
+    path: '/json',
     icon: Braces,
     description:
-      "Format, validate, and beautify JSON data with syntax highlighting.",
+      'Format, validate, and beautify JSON data with syntax highlighting.',
     features: [
-      "JSON validation",
-      "Pretty formatting",
-      "Syntax highlighting",
-      "Error detection",
+      'JSON validation',
+      'Pretty formatting',
+      'Syntax highlighting',
+      'Error detection',
     ],
-    color: "from-green-500 to-emerald-500",
-    badge: "Essential",
+    color: 'from-green-500 to-emerald-500',
+    badge: 'Essential',
   },
   {
-    name: "Color Format Converter",
-    path: "/color",
+    name: 'Color Format Converter',
+    path: '/color',
     icon: Palette,
-    description: "Convert between different color formats with live preview.",
+    description: 'Convert between different color formats with live preview.',
     features: [
-      "HEX to RGB/RGBA",
-      "HSL conversions",
-      "Color preview",
-      "Copy to clipboard",
+      'HEX to RGB/RGBA',
+      'HSL conversions',
+      'Color preview',
+      'Copy to clipboard',
     ],
-    color: "from-pink-500 to-rose-500",
-    badge: "Creative",
+    color: 'from-pink-500 to-rose-500',
+    badge: 'Creative',
   },
   {
-    name: "JWT Token Decoder",
-    path: "/jwt",
+    name: 'JWT Token Decoder',
+    path: '/jwt',
     icon: Key,
     description:
-      "Decode and inspect JWT tokens to view header, payload, and signature.",
+      'Decode and inspect JWT tokens to view header, payload, and signature.',
     features: [
-      "Token decoding",
-      "Header inspection",
-      "Payload analysis",
-      "Signature verification",
+      'Token decoding',
+      'Header inspection',
+      'Payload analysis',
+      'Signature verification',
     ],
-    color: "from-purple-500 to-violet-500",
-    badge: "Security",
+    color: 'from-purple-500 to-violet-500',
+    badge: 'Security',
   },
 ];
 
@@ -100,8 +100,8 @@ export function Home() {
             </div>
           </div>
           <p className="text-lg md:text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
-            A collection of{" "}
-            <span className="font-semibold text-primary">essential tools</span>{" "}
+            A collection of{' '}
+            <span className="font-semibold text-primary">essential tools</span>{' '}
             for developers. Clean, fast, and reliable solutions for your
             everyday coding needs.
           </p>
@@ -131,7 +131,7 @@ export function Home() {
 
       {/* Tools Grid */}
       <div className="grid gap-4 sm:gap-6 grid-cols-1 md:grid-cols-2 w-full">
-        {tools.map((tool) => {
+        {tools.map(tool => {
           const Icon = tool.icon;
 
           return (

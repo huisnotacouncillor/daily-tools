@@ -1,15 +1,15 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect } from 'react';
 import {
   Card,
   CardContent,
   CardDescription,
   CardHeader,
   CardTitle,
-} from "@/components/ui/card";
-import { Textarea } from "@/components/ui/textarea";
-import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+} from '@/components/ui/card';
+import { Textarea } from '@/components/ui/textarea';
+import { Button } from '@/components/ui/button';
+import { Badge } from '@/components/ui/badge';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import {
   AlertCircle,
   Copy,
@@ -17,12 +17,12 @@ import {
   Clock,
   Calendar,
   RefreshCw,
-} from "lucide-react";
-import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
+} from 'lucide-react';
+import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import {
   oneDark,
   oneLight,
-} from "react-syntax-highlighter/dist/esm/styles/prism";
+} from 'react-syntax-highlighter/dist/esm/styles/prism';
 import {
   decodeJwt,
   isTokenExpired,
@@ -34,10 +34,10 @@ import {
   generateSampleJwt,
   type JwtHeader,
   type JwtPayload,
-} from "@/lib/jwt-utils";
+} from '@/lib/jwt-utils';
 
 export function JwtDecoder() {
-  const [token, setToken] = useState("");
+  const [token, setToken] = useState('');
   const [isDarkMode, setIsDarkMode] = useState(false);
 
   const [decodedToken, setDecodedToken] = useState<{
@@ -46,17 +46,17 @@ export function JwtDecoder() {
     signature: string;
   } | null>(null);
 
-  const [error, setError] = useState<string>("");
+  const [error, setError] = useState<string>('');
 
   useEffect(() => {
     // Check if dark mode is enabled
-    setIsDarkMode(document.documentElement.classList.contains("dark"));
+    setIsDarkMode(document.documentElement.classList.contains('dark'));
   }, []);
 
   useEffect(() => {
     if (!token) {
       setDecodedToken(null);
-      setError("");
+      setError('');
       return;
     }
 
@@ -64,10 +64,10 @@ export function JwtDecoder() {
 
     if (result.isValid && result.decoded) {
       setDecodedToken(result.decoded);
-      setError("");
+      setError('');
     } else {
       setDecodedToken(null);
-      setError(result.error || "Failed to decode token");
+      setError(result.error || 'Failed to decode token');
     }
   }, [token]);
 
@@ -75,7 +75,7 @@ export function JwtDecoder() {
     try {
       await navigator.clipboard.writeText(text);
     } catch (err) {
-      console.error("Failed to copy text: ", err);
+      console.error('Failed to copy text: ', err);
     }
   };
 
@@ -91,10 +91,10 @@ export function JwtDecoder() {
     : false;
   const timeRemaining = decodedToken?.payload
     ? getTimeRemaining(decodedToken.payload)
-    : "";
+    : '';
   const tokenAge = decodedToken?.payload
     ? getTokenAge(decodedToken.payload)
-    : "";
+    : '';
 
   return (
     <div className="space-y-6">
@@ -125,10 +125,10 @@ export function JwtDecoder() {
             <CardContent className="space-y-4">
               <Textarea
                 value={token}
-                onChange={(e) => setToken(e.target.value)}
+                onChange={e => setToken(e.target.value)}
                 placeholder="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
                 rows={6}
-                className={`font-mono text-sm ${error ? "border-red-500" : ""}`}
+                className={`font-mono text-sm ${error ? 'border-red-500' : ''}`}
               />
               {error && (
                 <p className="text-sm text-red-500 flex items-center gap-1">
@@ -140,8 +140,8 @@ export function JwtDecoder() {
               {decodedToken && (
                 <div className="flex flex-col gap-2 text-sm">
                   <div className="flex items-center gap-2">
-                    <Badge variant={isExpired ? "destructive" : "default"}>
-                      {isExpired ? "Expired" : "Valid"}
+                    <Badge variant={isExpired ? 'destructive' : 'default'}>
+                      {isExpired ? 'Expired' : 'Valid'}
                     </Badge>
                     {isNotYetValid && (
                       <Badge variant="secondary">Not Yet Valid</Badge>
@@ -207,8 +207,8 @@ export function JwtDecoder() {
                         style={isDarkMode ? oneDark : oneLight}
                         customStyle={{
                           margin: 0,
-                          fontSize: "0.875rem",
-                          maxHeight: "300px",
+                          fontSize: '0.875rem',
+                          maxHeight: '300px',
                         }}
                       >
                         {JSON.stringify(decodedToken.header, null, 2)}
@@ -250,8 +250,8 @@ export function JwtDecoder() {
                         style={isDarkMode ? oneDark : oneLight}
                         customStyle={{
                           margin: 0,
-                          fontSize: "0.875rem",
-                          maxHeight: "300px",
+                          fontSize: '0.875rem',
+                          maxHeight: '300px',
                         }}
                       >
                         {JSON.stringify(decodedToken.payload, null, 2)}

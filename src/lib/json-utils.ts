@@ -11,7 +11,7 @@ export function validateAndParseJson(jsonString: string): {
   errorColumn?: number;
 } {
   if (!jsonString.trim()) {
-    return { isValid: false, error: "JSON string is empty" };
+    return { isValid: false, error: 'JSON string is empty' };
   }
 
   try {
@@ -35,7 +35,7 @@ export function validateAndParseJson(jsonString: string): {
 
     return {
       isValid: false,
-      error: error instanceof Error ? error.message : "Invalid JSON",
+      error: error instanceof Error ? error.message : 'Invalid JSON',
     };
   }
 }
@@ -69,7 +69,7 @@ export function formatJson(
   } catch (error) {
     return {
       isValid: false,
-      error: error instanceof Error ? error.message : "Failed to format JSON",
+      error: error instanceof Error ? error.message : 'Failed to format JSON',
     };
   }
 }
@@ -99,7 +99,7 @@ export function minifyJson(jsonString: string): {
   } catch (error) {
     return {
       isValid: false,
-      error: error instanceof Error ? error.message : "Failed to minify JSON",
+      error: error instanceof Error ? error.message : 'Failed to minify JSON',
     };
   }
 }
@@ -148,7 +148,7 @@ export function getJsonStats(data: unknown): {
   countTypes(data, stats);
 
   // Add keys count for objects
-  if (typeof data === "object" && data !== null && !Array.isArray(data)) {
+  if (typeof data === 'object' && data !== null && !Array.isArray(data)) {
     stats.keys = Object.keys(data).length;
   }
 
@@ -161,8 +161,8 @@ export function getJsonStats(data: unknown): {
  * @returns The type as a string
  */
 function getDataType(value: unknown): string {
-  if (value === null) return "null";
-  if (Array.isArray(value)) return "array";
+  if (value === null) return 'null';
+  if (Array.isArray(value)) return 'array';
   return typeof value;
 }
 
@@ -173,7 +173,7 @@ function getDataType(value: unknown): string {
  * @returns The maximum depth
  */
 function getMaxDepth(obj: unknown, currentDepth: number = 0): number {
-  if (typeof obj !== "object" || obj === null) {
+  if (typeof obj !== 'object' || obj === null) {
     return currentDepth;
   }
 
@@ -210,18 +210,18 @@ function countTypes(
 ): void {
   if (data === null) {
     stats.nulls++;
-  } else if (typeof data === "boolean") {
+  } else if (typeof data === 'boolean') {
     stats.booleans++;
-  } else if (typeof data === "number") {
+  } else if (typeof data === 'number') {
     stats.numbers++;
-  } else if (typeof data === "string") {
+  } else if (typeof data === 'string') {
     stats.strings++;
   } else if (Array.isArray(data)) {
     stats.arrays++;
     for (const item of data) {
       countTypes(item, stats);
     }
-  } else if (typeof data === "object") {
+  } else if (typeof data === 'object') {
     stats.objects++;
     for (const value of Object.values(data)) {
       countTypes(value, stats);
@@ -239,7 +239,7 @@ function getLineAndColumn(
   text: string,
   position: number
 ): { line: number; column: number } {
-  const lines = text.substring(0, position).split("\n");
+  const lines = text.substring(0, position).split('\n');
   return {
     line: lines.length,
     column: lines[lines.length - 1].length + 1,
@@ -253,13 +253,13 @@ function getLineAndColumn(
  */
 export function escapeJsonString(str: string): string {
   return str
-    .replace(/\\/g, "\\\\")
+    .replace(/\\/g, '\\\\')
     .replace(/"/g, '\\"')
-    .replace(/\n/g, "\\n")
-    .replace(/\r/g, "\\r")
-    .replace(/\t/g, "\\t")
-    .replace(/\f/g, "\\f")
-    .replace(/[\b]/g, "\\b");
+    .replace(/\n/g, '\\n')
+    .replace(/\r/g, '\\r')
+    .replace(/\t/g, '\\t')
+    .replace(/\f/g, '\\f')
+    .replace(/[\b]/g, '\\b');
 }
 
 /**
@@ -270,19 +270,19 @@ export function escapeJsonString(str: string): string {
  */
 export function convertToJson(
   input: string,
-  format: string = "auto"
+  format: string = 'auto'
 ): {
   isValid: boolean;
   json?: string;
   error?: string;
 } {
   if (!input.trim()) {
-    return { isValid: false, error: "Input is empty" };
+    return { isValid: false, error: 'Input is empty' };
   }
 
   // For now, we'll just handle JSON input
   // In a real implementation, you might add YAML, XML, CSV parsers
-  if (format === "auto" || format === "json") {
+  if (format === 'auto' || format === 'json') {
     const result = validateAndParseJson(input);
     if (result.isValid) {
       return {

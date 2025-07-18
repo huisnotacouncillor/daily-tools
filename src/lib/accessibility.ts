@@ -10,17 +10,17 @@
 export function visuallyHidden(id?: string) {
   return {
     id,
-    className: "sr-only",
+    className: 'sr-only',
     style: {
-      position: "absolute",
-      width: "1px",
-      height: "1px",
-      padding: "0",
-      margin: "-1px",
-      overflow: "hidden",
-      clip: "rect(0, 0, 0, 0)",
-      whiteSpace: "nowrap",
-      borderWidth: "0",
+      position: 'absolute',
+      width: '1px',
+      height: '1px',
+      padding: '0',
+      margin: '-1px',
+      overflow: 'hidden',
+      clip: 'rect(0, 0, 0, 0)',
+      whiteSpace: 'nowrap',
+      borderWidth: '0',
     },
   };
 }
@@ -34,7 +34,7 @@ export function accessibleLabel(inputId: string) {
   return {
     htmlFor: inputId,
     id: `${inputId}-label`,
-    className: "block text-sm font-medium mb-2",
+    className: 'block text-sm font-medium mb-2',
   };
 }
 
@@ -46,7 +46,7 @@ export function accessibleLabel(inputId: string) {
 export function accessibleDescription(inputId: string) {
   return {
     id: `${inputId}-description`,
-    className: "text-sm text-muted-foreground mt-1",
+    className: 'text-sm text-muted-foreground mt-1',
   };
 }
 
@@ -57,7 +57,7 @@ export function accessibleDescription(inputId: string) {
  */
 export function ariaDescribedBy(descriptionId: string) {
   return {
-    "aria-describedby": descriptionId,
+    'aria-describedby': descriptionId,
   };
 }
 
@@ -69,8 +69,8 @@ export function ariaDescribedBy(descriptionId: string) {
  */
 export function ariaInvalid(errorId: string, hasError: boolean) {
   return {
-    "aria-invalid": hasError,
-    "aria-errormessage": hasError ? errorId : undefined,
+    'aria-invalid': hasError,
+    'aria-errormessage': hasError ? errorId : undefined,
   };
 }
 
@@ -82,8 +82,8 @@ export function ariaInvalid(errorId: string, hasError: boolean) {
  */
 export function ariaExpanded(controlsId: string, expanded: boolean) {
   return {
-    "aria-controls": controlsId,
-    "aria-expanded": expanded,
+    'aria-controls': controlsId,
+    'aria-expanded': expanded,
   };
 }
 
@@ -95,9 +95,9 @@ export function ariaExpanded(controlsId: string, expanded: boolean) {
  */
 export function ariaTab(panelId: string, selected: boolean) {
   return {
-    role: "tab",
-    "aria-controls": panelId,
-    "aria-selected": selected,
+    role: 'tab',
+    'aria-controls': panelId,
+    'aria-selected': selected,
     tabIndex: selected ? 0 : -1,
   };
 }
@@ -109,8 +109,8 @@ export function ariaTab(panelId: string, selected: boolean) {
  */
 export function ariaTabPanel(tabId: string) {
   return {
-    role: "tabpanel",
-    "aria-labelledby": tabId,
+    role: 'tabpanel',
+    'aria-labelledby': tabId,
     tabIndex: 0,
   };
 }
@@ -122,9 +122,9 @@ export function ariaTabPanel(tabId: string) {
  */
 export function ariaDialog(titleId: string) {
   return {
-    role: "dialog",
-    "aria-modal": true,
-    "aria-labelledby": titleId,
+    role: 'dialog',
+    'aria-modal': true,
+    'aria-labelledby': titleId,
   };
 }
 
@@ -135,7 +135,7 @@ export function ariaDialog(titleId: string) {
  */
 export function ariaTooltip(tooltipId: string) {
   return {
-    "aria-describedby": tooltipId,
+    'aria-describedby': tooltipId,
   };
 }
 
@@ -144,9 +144,9 @@ export function ariaTooltip(tooltipId: string) {
  * @param politeness - Politeness level (polite or assertive)
  * @returns ARIA attributes for the live region
  */
-export function ariaLive(politeness: "polite" | "assertive" = "polite") {
+export function ariaLive(politeness: 'polite' | 'assertive' = 'polite') {
   return {
-    "aria-live": politeness,
-    role: "status",
+    'aria-live': politeness,
+    role: 'status',
   };
 }

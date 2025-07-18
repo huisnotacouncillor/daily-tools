@@ -1,5 +1,5 @@
-import { Outlet, Link, useLocation } from "react-router-dom";
-import { Button } from "@/components/ui/button";
+import { Outlet, Link, useLocation } from 'react-router-dom';
+import { Button } from '@/components/ui/button';
 import {
   Code,
   SquareCode,
@@ -8,33 +8,33 @@ import {
   KeySquare,
   Menu,
   X,
-} from "lucide-react";
-import { useState, useEffect } from "react";
+} from 'lucide-react';
+import { useState, useEffect } from 'react';
 
 const navigationItems = [
   {
-    name: "Regex Validator",
-    path: "/regex",
+    name: 'Regex Validator',
+    path: '/regex',
     icon: SquareCode,
-    description: "Test and validate regular expressions",
+    description: 'Test and validate regular expressions',
   },
   {
-    name: "JSON Formatter",
-    path: "/json",
+    name: 'JSON Formatter',
+    path: '/json',
     icon: FileJson,
-    description: "Format and validate JSON data",
+    description: 'Format and validate JSON data',
   },
   {
-    name: "Color Converter",
-    path: "/color",
+    name: 'Color Converter',
+    path: '/color',
     icon: Palette,
-    description: "Convert between color formats",
+    description: 'Convert between color formats',
   },
   {
-    name: "JWT Decoder",
-    path: "/jwt",
+    name: 'JWT Decoder',
+    path: '/jwt',
     icon: KeySquare,
-    description: "Decode and inspect JWT tokens",
+    description: 'Decode and inspect JWT tokens',
   },
 ];
 
@@ -66,10 +66,10 @@ export function Layout() {
                 <Code className="h-5 w-5 text-white" />
               </div>
               <div className="flex flex-col">
-                <span className="font-bold text-lg leading-tight">
+                <span className="font-bold text-lg leading-tight whitespace-nowrap">
                   Developer Tools
                 </span>
-                <span className="text-xs text-muted-foreground hidden sm:block">
+                <span className="text-xs text-muted-foreground hidden sm:block whitespace-nowrap">
                   Essential coding utilities
                 </span>
               </div>
@@ -81,7 +81,7 @@ export function Layout() {
             className="hidden md:flex items-center space-x-2"
             aria-label="Main Navigation"
           >
-            {navigationItems.map((item) => {
+            {navigationItems.map(item => {
               const Icon = item.icon;
               const isActive = location.pathname === item.path;
               return (
@@ -90,18 +90,22 @@ export function Layout() {
                   to={item.path}
                   className={`group flex items-center rounded-lg px-3 py-2 text-sm font-medium transition-all hover:bg-accent hover:text-accent-foreground ${
                     isActive
-                      ? "bg-primary/10 text-primary border border-primary/20"
-                      : "hover:bg-accent hover:scale-[1.02]"
+                      ? 'bg-accent text-primary  border-primary/20'
+                      : 'hover:bg-accent hover:scale-[1.02]'
                   }`}
                 >
                   <Icon
                     className={`mr-2 h-5 w-5 ${
                       isActive
-                        ? "text-primary"
-                        : "text-muted-foreground group-hover:text-accent-foreground"
+                        ? 'text-primary'
+                        : 'text-muted-foreground group-hover:text-accent-foreground'
                     }`}
                   />
-                  <span className={isActive ? "text-primary" : ""}>
+                  <span
+                    className={`whitespace-nowrap ${
+                      isActive ? 'text-primary' : ''
+                    }`}
+                  >
                     {item.name}
                   </span>
                 </Link>
@@ -118,7 +122,7 @@ export function Layout() {
             aria-expanded={mobileNavOpen}
             aria-controls="mobile-nav-menu"
             aria-label={
-              mobileNavOpen ? "Close navigation menu" : "Open navigation menu"
+              mobileNavOpen ? 'Close navigation menu' : 'Open navigation menu'
             }
           >
             {mobileNavOpen ? (
@@ -138,7 +142,7 @@ export function Layout() {
             aria-label="Mobile Navigation"
           >
             <div className="flex flex-col space-y-1">
-              {navigationItems.map((item) => {
+              {navigationItems.map(item => {
                 const Icon = item.icon;
                 const isActive = location.pathname === item.path;
                 return (
@@ -147,19 +151,23 @@ export function Layout() {
                     to={item.path}
                     className={`group flex items-center rounded-lg px-3 py-2 text-sm font-medium transition-all hover:bg-accent hover:text-accent-foreground ${
                       isActive
-                        ? "bg-primary/10 text-primary border border-primary/20"
-                        : "hover:bg-accent hover:scale-[1.02]"
+                        ? 'bg-primary/10 text-primary border border-primary/20'
+                        : 'hover:bg-accent hover:scale-[1.02]'
                     }`}
                     onClick={() => setMobileNavOpen(false)}
                   >
                     <Icon
                       className={`mr-2 h-5 w-5 ${
                         isActive
-                          ? "text-primary"
-                          : "text-muted-foreground group-hover:text-accent-foreground"
+                          ? 'text-primary'
+                          : 'text-muted-foreground group-hover:text-accent-foreground'
                       }`}
                     />
-                    <span className={isActive ? "text-primary" : ""}>
+                    <span
+                      className={`whitespace-nowrap ${
+                        isActive ? 'text-primary' : ''
+                      }`}
+                    >
                       {item.name}
                     </span>
                   </Link>
@@ -171,11 +179,8 @@ export function Layout() {
       </header>
 
       {/* Main content */}
-      <main
-        id="main-content"
-        className="flex-1 flex flex-col w-full max-w-full container mx-auto px-4 lg:px-6 xl:px-8"
-      >
-        <div className="py-4 sm:py-6 lg:py-8 xl:py-12 flex-1 max-w-full">
+      <main id="main-content" className="flex-1 flex flex-col w-full">
+        <div className="container mx-auto px-4 lg:px-6 xl:px-8 py-4 sm:py-6 lg:py-8 xl:py-12 flex-1">
           <Outlet />
         </div>
       </main>

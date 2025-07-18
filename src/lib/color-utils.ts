@@ -34,12 +34,13 @@ export function parseHexColor(hex: string): {
 } {
   // Remove # if present and convert to uppercase
   const cleanHex = hex.replace('#', '').toUpperCase();
-  
+
   // Check if it's a valid hex format
   if (!/^[0-9A-F]{3}$|^[0-9A-F]{6}$/.test(cleanHex)) {
     return {
       isValid: false,
-      error: 'Invalid HEX format. Use 3 or 6 digit hex values (e.g., #FF0000 or #F00)'
+      error:
+        'Invalid HEX format. Use 3 or 6 digit hex values (e.g., #FF0000 or #F00)',
     };
   }
 
@@ -59,7 +60,7 @@ export function parseHexColor(hex: string): {
 
   return {
     isValid: true,
-    rgb: { r, g, b }
+    rgb: { r, g, b },
   };
 }
 
@@ -88,8 +89,12 @@ export function parseRgbColor(rgbString: string): {
   rgba?: RGBAColor;
   error?: string;
 } {
-  const rgbMatch = rgbString.match(/^rgb\(\s*(\d+)\s*,\s*(\d+)\s*,\s*(\d+)\s*\)$/i);
-  const rgbaMatch = rgbString.match(/^rgba\(\s*(\d+)\s*,\s*(\d+)\s*,\s*(\d+)\s*,\s*([\d.]+)\s*\)$/i);
+  const rgbMatch = rgbString.match(
+    /^rgb\(\s*(\d+)\s*,\s*(\d+)\s*,\s*(\d+)\s*\)$/i
+  );
+  const rgbaMatch = rgbString.match(
+    /^rgba\(\s*(\d+)\s*,\s*(\d+)\s*,\s*(\d+)\s*,\s*([\d.]+)\s*\)$/i
+  );
 
   if (rgbaMatch) {
     const r = parseInt(rgbaMatch[1], 10);
@@ -97,16 +102,25 @@ export function parseRgbColor(rgbString: string): {
     const b = parseInt(rgbaMatch[3], 10);
     const a = parseFloat(rgbaMatch[4]);
 
-    if (r < 0 || r > 255 || g < 0 || g > 255 || b < 0 || b > 255 || a < 0 || a > 1) {
+    if (
+      r < 0 ||
+      r > 255 ||
+      g < 0 ||
+      g > 255 ||
+      b < 0 ||
+      b > 255 ||
+      a < 0 ||
+      a > 1
+    ) {
       return {
         isValid: false,
-        error: 'RGB values must be 0-255, alpha must be 0-1'
+        error: 'RGB values must be 0-255, alpha must be 0-1',
       };
     }
 
     return {
       isValid: true,
-      rgba: { r, g, b, a }
+      rgba: { r, g, b, a },
     };
   }
 
@@ -118,19 +132,19 @@ export function parseRgbColor(rgbString: string): {
     if (r < 0 || r > 255 || g < 0 || g > 255 || b < 0 || b > 255) {
       return {
         isValid: false,
-        error: 'RGB values must be between 0 and 255'
+        error: 'RGB values must be between 0 and 255',
       };
     }
 
     return {
       isValid: true,
-      rgb: { r, g, b }
+      rgb: { r, g, b },
     };
   }
 
   return {
     isValid: false,
-    error: 'Invalid RGB format. Use rgb(r, g, b) or rgba(r, g, b, a)'
+    error: 'Invalid RGB format. Use rgb(r, g, b) or rgba(r, g, b, a)',
   };
 }
 
@@ -158,7 +172,7 @@ export function rgbToHsl(rgb: RGBColor): HSLColor {
 
     switch (max) {
       case r:
-        h = ((g - b) / diff) + (g < b ? 6 : 0);
+        h = (g - b) / diff + (g < b ? 6 : 0);
         break;
       case g:
         h = (b - r) / diff + 2;
@@ -173,7 +187,7 @@ export function rgbToHsl(rgb: RGBColor): HSLColor {
   return {
     h: Math.round(h * 360),
     s: Math.round(s * 100),
-    l: Math.round(l * 100)
+    l: Math.round(l * 100),
   };
 }
 
@@ -195,9 +209,9 @@ export function hslToRgb(hsl: HSLColor): RGBColor {
   const hue2rgb = (p: number, q: number, t: number) => {
     if (t < 0) t += 1;
     if (t > 1) t -= 1;
-    if (t < 1/6) return p + (q - p) * 6 * t;
-    if (t < 1/2) return q;
-    if (t < 2/3) return p + (q - p) * (2/3 - t) * 6;
+    if (t < 1 / 6) return p + (q - p) * 6 * t;
+    if (t < 1 / 2) return q;
+    if (t < 2 / 3) return p + (q - p) * (2 / 3 - t) * 6;
     return p;
   };
 
@@ -205,9 +219,9 @@ export function hslToRgb(hsl: HSLColor): RGBColor {
   const p = 2 * l - q;
 
   return {
-    r: Math.round(hue2rgb(p, q, h + 1/3) * 255),
+    r: Math.round(hue2rgb(p, q, h + 1 / 3) * 255),
     g: Math.round(hue2rgb(p, q, h) * 255),
-    b: Math.round(hue2rgb(p, q, h - 1/3) * 255)
+    b: Math.round(hue2rgb(p, q, h - 1 / 3) * 255),
   };
 }
 
@@ -222,8 +236,12 @@ export function parseHslColor(hslString: string): {
   hsla?: HSLAColor;
   error?: string;
 } {
-  const hslMatch = hslString.match(/^hsl\(\s*(\d+)\s*,\s*(\d+)%\s*,\s*(\d+)%\s*\)$/i);
-  const hslaMatch = hslString.match(/^hsla\(\s*(\d+)\s*,\s*(\d+)%\s*,\s*(\d+)%\s*,\s*([\d.]+)\s*\)$/i);
+  const hslMatch = hslString.match(
+    /^hsl\(\s*(\d+)\s*,\s*(\d+)%\s*,\s*(\d+)%\s*\)$/i
+  );
+  const hslaMatch = hslString.match(
+    /^hsla\(\s*(\d+)\s*,\s*(\d+)%\s*,\s*(\d+)%\s*,\s*([\d.]+)\s*\)$/i
+  );
 
   if (hslaMatch) {
     const h = parseInt(hslaMatch[1], 10);
@@ -231,16 +249,25 @@ export function parseHslColor(hslString: string): {
     const l = parseInt(hslaMatch[3], 10);
     const a = parseFloat(hslaMatch[4]);
 
-    if (h < 0 || h > 360 || s < 0 || s > 100 || l < 0 || l > 100 || a < 0 || a > 1) {
+    if (
+      h < 0 ||
+      h > 360 ||
+      s < 0 ||
+      s > 100 ||
+      l < 0 ||
+      l > 100 ||
+      a < 0 ||
+      a > 1
+    ) {
       return {
         isValid: false,
-        error: 'H must be 0-360, S and L must be 0-100%, alpha must be 0-1'
+        error: 'H must be 0-360, S and L must be 0-100%, alpha must be 0-1',
       };
     }
 
     return {
       isValid: true,
-      hsla: { h, s, l, a }
+      hsla: { h, s, l, a },
     };
   }
 
@@ -252,19 +279,19 @@ export function parseHslColor(hslString: string): {
     if (h < 0 || h > 360 || s < 0 || s > 100 || l < 0 || l > 100) {
       return {
         isValid: false,
-        error: 'H must be between 0-360, S and L must be between 0-100%'
+        error: 'H must be between 0-360, S and L must be between 0-100%',
       };
     }
 
     return {
       isValid: true,
-      hsl: { h, s, l }
+      hsl: { h, s, l },
     };
   }
 
   return {
     isValid: false,
-    error: 'Invalid HSL format. Use hsl(h, s%, l%) or hsla(h, s%, l%, a)'
+    error: 'Invalid HSL format. Use hsl(h, s%, l%) or hsla(h, s%, l%, a)',
   };
 }
 

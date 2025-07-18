@@ -1,23 +1,23 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect } from 'react';
 import {
   Card,
   CardContent,
   CardDescription,
   CardHeader,
   CardTitle,
-} from "@/components/ui/card";
-import { Textarea } from "@/components/ui/textarea";
-import { Button } from "@/components/ui/button";
-import { Label } from "@/components/ui/label";
-import { Badge } from "@/components/ui/badge";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+} from '@/components/ui/card';
+import { Textarea } from '@/components/ui/textarea';
+import { Button } from '@/components/ui/button';
+import { Label } from '@/components/ui/label';
+import { Badge } from '@/components/ui/badge';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@/components/ui/select";
+} from '@/components/ui/select';
 import {
   AlertCircle,
   CheckCircle,
@@ -25,18 +25,18 @@ import {
   Download,
   Upload,
   BarChart3,
-} from "lucide-react";
-import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
+} from 'lucide-react';
+import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import {
   oneDark,
   oneLight,
-} from "react-syntax-highlighter/dist/esm/styles/prism";
+} from 'react-syntax-highlighter/dist/esm/styles/prism';
 import {
   validateAndParseJson,
   formatJson,
   minifyJson,
   getJsonStats,
-} from "@/lib/json-utils";
+} from '@/lib/json-utils';
 
 const sampleJson = `{
   "name": "John Doe",
@@ -54,21 +54,21 @@ const sampleJson = `{
 
 export function JsonFormatter() {
   const [input, setInput] = useState(sampleJson);
-  const [indentSize, setIndentSize] = useState("2");
+  const [indentSize, setIndentSize] = useState('2');
   const [isDarkMode, setIsDarkMode] = useState(false);
 
   const [validation, setValidation] = useState<
     ReturnType<typeof validateAndParseJson>
   >({ isValid: true });
-  const [formatted, setFormatted] = useState<string>("");
-  const [minified, setMinified] = useState<string>("");
+  const [formatted, setFormatted] = useState<string>('');
+  const [minified, setMinified] = useState<string>('');
   const [stats, setStats] = useState<ReturnType<typeof getJsonStats> | null>(
     null
   );
 
   useEffect(() => {
     // Check if dark mode is enabled
-    setIsDarkMode(document.documentElement.classList.contains("dark"));
+    setIsDarkMode(document.documentElement.classList.contains('dark'));
   }, []);
 
   useEffect(() => {
@@ -93,8 +93,8 @@ export function JsonFormatter() {
       const jsonStats = getJsonStats(validationResult.data);
       setStats(jsonStats);
     } else {
-      setFormatted("");
-      setMinified("");
+      setFormatted('');
+      setMinified('');
       setStats(null);
     }
   }, [input, indentSize]);
@@ -103,14 +103,14 @@ export function JsonFormatter() {
     try {
       await navigator.clipboard.writeText(text);
     } catch (err) {
-      console.error("Failed to copy text: ", err);
+      console.error('Failed to copy text: ', err);
     }
   };
 
   const downloadJson = (content: string, filename: string) => {
-    const blob = new Blob([content], { type: "application/json" });
+    const blob = new Blob([content], { type: 'application/json' });
     const url = URL.createObjectURL(blob);
-    const a = document.createElement("a");
+    const a = document.createElement('a');
     a.href = url;
     a.download = filename;
     document.body.appendChild(a);
@@ -123,7 +123,7 @@ export function JsonFormatter() {
     const file = event.target.files?.[0];
     if (file) {
       const reader = new FileReader();
-      reader.onload = (e) => {
+      reader.onload = e => {
         const content = e.target?.result as string;
         setInput(content);
       };
@@ -168,7 +168,7 @@ export function JsonFormatter() {
                     variant="outline"
                     size="sm"
                     onClick={() =>
-                      document.getElementById("file-upload")?.click()
+                      document.getElementById('file-upload')?.click()
                     }
                   >
                     <Upload className="h-3 w-3 mr-1" />
@@ -201,11 +201,11 @@ export function JsonFormatter() {
                 <Textarea
                   id="json-input"
                   value={input}
-                  onChange={(e) => setInput(e.target.value)}
+                  onChange={e => setInput(e.target.value)}
                   placeholder="Enter or paste JSON data..."
                   rows={16}
                   className={`font-mono text-sm ${
-                    validation.isValid ? "" : "border-red-500"
+                    validation.isValid ? '' : 'border-red-500'
                   }`}
                 />
                 {validation.error && (
@@ -215,7 +215,7 @@ export function JsonFormatter() {
                       <p>{validation.error}</p>
                       {validation.errorLine && validation.errorColumn && (
                         <p className="text-xs">
-                          Line {validation.errorLine}, Column{" "}
+                          Line {validation.errorLine}, Column{' '}
                           {validation.errorColumn}
                         </p>
                       )}
@@ -315,7 +315,7 @@ export function JsonFormatter() {
                         variant="outline"
                         size="sm"
                         onClick={() =>
-                          downloadJson(formatted, "formatted.json")
+                          downloadJson(formatted, 'formatted.json')
                         }
                         disabled={!formatted}
                       >
@@ -331,8 +331,8 @@ export function JsonFormatter() {
                         style={isDarkMode ? oneDark : oneLight}
                         customStyle={{
                           margin: 0,
-                          fontSize: "0.875rem",
-                          maxHeight: "400px",
+                          fontSize: '0.875rem',
+                          maxHeight: '400px',
                         }}
                         showLineNumbers
                       >
@@ -341,8 +341,8 @@ export function JsonFormatter() {
                     ) : (
                       <div className="p-4 text-muted-foreground text-center">
                         {validation.error
-                          ? "Fix JSON errors to see formatted output"
-                          : "Enter JSON data to see formatted output"}
+                          ? 'Fix JSON errors to see formatted output'
+                          : 'Enter JSON data to see formatted output'}
                       </div>
                     )}
                   </div>
@@ -364,7 +364,7 @@ export function JsonFormatter() {
                       <Button
                         variant="outline"
                         size="sm"
-                        onClick={() => downloadJson(minified, "minified.json")}
+                        onClick={() => downloadJson(minified, 'minified.json')}
                         disabled={!minified}
                       >
                         <Download className="h-3 w-3 mr-1" />
@@ -380,8 +380,8 @@ export function JsonFormatter() {
                     ) : (
                       <div className="text-muted-foreground text-center">
                         {validation.error
-                          ? "Fix JSON errors to see minified output"
-                          : "Enter JSON data to see minified output"}
+                          ? 'Fix JSON errors to see minified output'
+                          : 'Enter JSON data to see minified output'}
                       </div>
                     )}
                   </div>

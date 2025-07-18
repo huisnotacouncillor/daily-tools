@@ -1,17 +1,17 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect } from 'react';
 import {
   Card,
   CardContent,
   CardDescription,
   CardHeader,
   CardTitle,
-} from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Copy, Palette, Eye, AlertCircle, Shuffle } from "lucide-react";
+} from '@/components/ui/card';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
+import { Button } from '@/components/ui/button';
+import { Badge } from '@/components/ui/badge';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import { Copy, Palette, Eye, AlertCircle, Shuffle } from 'lucide-react';
 import {
   parseHexColor,
   rgbToHex,
@@ -28,28 +28,28 @@ import {
   type RGBColor,
   type RGBAColor,
   type HSLAColor,
-} from "@/lib/color-utils";
+} from '@/lib/color-utils';
 
 const presetColors = [
-  { name: "Red", hex: "#FF0000" },
-  { name: "Green", hex: "#00FF00" },
-  { name: "Blue", hex: "#0000FF" },
-  { name: "Yellow", hex: "#FFFF00" },
-  { name: "Cyan", hex: "#00FFFF" },
-  { name: "Magenta", hex: "#FF00FF" },
-  { name: "Orange", hex: "#FFA500" },
-  { name: "Purple", hex: "#800080" },
-  { name: "Pink", hex: "#FFC0CB" },
-  { name: "Brown", hex: "#A52A2A" },
-  { name: "Gray", hex: "#808080" },
-  { name: "Black", hex: "#000000" },
-  { name: "White", hex: "#FFFFFF" },
+  { name: 'Red', hex: '#FF0000' },
+  { name: 'Green', hex: '#00FF00' },
+  { name: 'Blue', hex: '#0000FF' },
+  { name: 'Yellow', hex: '#FFFF00' },
+  { name: 'Cyan', hex: '#00FFFF' },
+  { name: 'Magenta', hex: '#FF00FF' },
+  { name: 'Orange', hex: '#FFA500' },
+  { name: 'Purple', hex: '#800080' },
+  { name: 'Pink', hex: '#FFC0CB' },
+  { name: 'Brown', hex: '#A52A2A' },
+  { name: 'Gray', hex: '#808080' },
+  { name: 'Black', hex: '#000000' },
+  { name: 'White', hex: '#FFFFFF' },
 ];
 
 export function ColorConverter() {
-  const [hexInput, setHexInput] = useState("#3B82F6");
-  const [rgbInput, setRgbInput] = useState("");
-  const [hslInput, setHslInput] = useState("");
+  const [hexInput, setHexInput] = useState('#3B82F6');
+  const [rgbInput, setRgbInput] = useState('');
+  const [hslInput, setHslInput] = useState('');
 
   const [currentColor, setCurrentColor] = useState<RGBColor>({
     r: 59,
@@ -58,9 +58,9 @@ export function ColorConverter() {
   });
   const [alpha, setAlpha] = useState(1);
 
-  const [hexError, setHexError] = useState<string>("");
-  const [rgbError, setRgbError] = useState<string>("");
-  const [hslError, setHslError] = useState<string>("");
+  const [hexError, setHexError] = useState<string>('');
+  const [rgbError, setRgbError] = useState<string>('');
+  const [hslError, setHslError] = useState<string>('');
 
   // Update all formats when current color changes
   useEffect(() => {
@@ -72,9 +72,9 @@ export function ColorConverter() {
     setHslInput(formatHsl(hsl));
 
     // Clear errors when color is valid
-    setHexError("");
-    setRgbError("");
-    setHslError("");
+    setHexError('');
+    setRgbError('');
+    setHslError('');
   }, [currentColor]);
 
   const handleHexChange = (value: string) => {
@@ -83,9 +83,9 @@ export function ColorConverter() {
 
     if (result.isValid && result.rgb) {
       setCurrentColor(result.rgb);
-      setHexError("");
+      setHexError('');
     } else {
-      setHexError(result.error || "Invalid HEX color");
+      setHexError(result.error || 'Invalid HEX color');
     }
   };
 
@@ -105,9 +105,9 @@ export function ColorConverter() {
         setCurrentColor(result.rgb);
         setAlpha(1);
       }
-      setRgbError("");
+      setRgbError('');
     } else {
-      setRgbError(result.error || "Invalid RGB color");
+      setRgbError(result.error || 'Invalid RGB color');
     }
   };
 
@@ -129,9 +129,9 @@ export function ColorConverter() {
         setCurrentColor(rgb);
         setAlpha(1);
       }
-      setHslError("");
+      setHslError('');
     } else {
-      setHslError(result.error || "Invalid HSL color");
+      setHslError(result.error || 'Invalid HSL color');
     }
   };
 
@@ -139,7 +139,7 @@ export function ColorConverter() {
     try {
       await navigator.clipboard.writeText(text);
     } catch (err) {
-      console.error("Failed to copy text: ", err);
+      console.error('Failed to copy text: ', err);
     }
   };
 
@@ -204,9 +204,9 @@ export function ColorConverter() {
                   <Input
                     id="hex-input"
                     value={hexInput}
-                    onChange={(e) => handleHexChange(e.target.value)}
+                    onChange={e => handleHexChange(e.target.value)}
                     placeholder="#FF0000"
-                    className={hexError ? "border-red-500" : ""}
+                    className={hexError ? 'border-red-500' : ''}
                   />
                   <Button
                     variant="outline"
@@ -230,9 +230,9 @@ export function ColorConverter() {
                   <Input
                     id="rgb-input"
                     value={rgbInput}
-                    onChange={(e) => handleRgbChange(e.target.value)}
+                    onChange={e => handleRgbChange(e.target.value)}
                     placeholder="rgb(255, 0, 0)"
-                    className={rgbError ? "border-red-500" : ""}
+                    className={rgbError ? 'border-red-500' : ''}
                   />
                   <Button
                     variant="outline"
@@ -256,9 +256,9 @@ export function ColorConverter() {
                   <Input
                     id="hsl-input"
                     value={hslInput}
-                    onChange={(e) => handleHslChange(e.target.value)}
+                    onChange={e => handleHslChange(e.target.value)}
                     placeholder="hsl(0, 100%, 50%)"
-                    className={hslError ? "border-red-500" : ""}
+                    className={hslError ? 'border-red-500' : ''}
                   />
                   <Button
                     variant="outline"
@@ -285,7 +285,7 @@ export function ColorConverter() {
                   max="1"
                   step="0.1"
                   value={alpha}
-                  onChange={(e) => setAlpha(parseFloat(e.target.value) || 0)}
+                  onChange={e => setAlpha(parseFloat(e.target.value) || 0)}
                   className="w-24"
                 />
               </div>
@@ -311,7 +311,7 @@ export function ColorConverter() {
             </CardHeader>
             <CardContent>
               <div className="grid grid-cols-4 gap-2">
-                {presetColors.map((preset) => (
+                {presetColors.map(preset => (
                   <button
                     key={preset.name}
                     onClick={() => selectPresetColor(preset.hex)}
@@ -346,7 +346,7 @@ export function ColorConverter() {
                   className="w-full h-32 rounded-lg border flex items-center justify-center text-lg font-medium"
                   style={{
                     backgroundColor: `rgba(${currentColor.r}, ${currentColor.g}, ${currentColor.b}, ${alpha})`,
-                    color: brightness === "light" ? "#000000" : "#ffffff",
+                    color: brightness === 'light' ? '#000000' : '#ffffff',
                   }}
                 >
                   Sample Text
@@ -358,7 +358,7 @@ export function ColorConverter() {
                       <span className="text-muted-foreground">Brightness:</span>
                       <Badge
                         variant={
-                          brightness === "light" ? "default" : "secondary"
+                          brightness === 'light' ? 'default' : 'secondary'
                         }
                       >
                         {brightness}
@@ -490,7 +490,7 @@ export function ColorConverter() {
                           {rgbToHex(currentColor)}
                           {Math.round(alpha * 255)
                             .toString(16)
-                            .padStart(2, "0")
+                            .padStart(2, '0')
                             .toUpperCase()}
                         </p>
                       </div>
@@ -501,7 +501,7 @@ export function ColorConverter() {
                           copyToClipboard(
                             `${rgbToHex(currentColor)}${Math.round(alpha * 255)
                               .toString(16)
-                              .padStart(2, "0")
+                              .padStart(2, '0')
                               .toUpperCase()}`
                           )
                         }

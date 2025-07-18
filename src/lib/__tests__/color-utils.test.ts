@@ -11,7 +11,7 @@ import {
   formatHsl,
   formatHsla,
   getContrastRatio,
-  getColorBrightness
+  getColorBrightness,
 } from '../color-utils';
 
 describe('parseHexColor', () => {

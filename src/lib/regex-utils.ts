@@ -3,8 +3,8 @@
  * @param pattern - The regex pattern to validate
  * @returns An object containing validation result and error message if any
  */
-export function validateRegexPattern(pattern: string): { 
-  isValid: boolean; 
+export function validateRegexPattern(pattern: string): {
+  isValid: boolean;
   error?: string;
   regex?: RegExp;
 } {
@@ -17,9 +17,10 @@ export function validateRegexPattern(pattern: string): {
     const regex = new RegExp(pattern);
     return { isValid: true, regex };
   } catch (error) {
-    return { 
-      isValid: false, 
-      error: error instanceof Error ? error.message : 'Invalid regular expression' 
+    return {
+      isValid: false,
+      error:
+        error instanceof Error ? error.message : 'Invalid regular expression',
     };
   }
 }
@@ -32,7 +33,7 @@ export function validateRegexPattern(pattern: string): {
  * @returns An object containing match results
  */
 export function testRegexPattern(
-  pattern: string, 
+  pattern: string,
   testString: string,
   flags: string = ''
 ): {
@@ -51,27 +52,28 @@ export function testRegexPattern(
   try {
     const regex = new RegExp(pattern, flags);
     const matches: RegExpMatchArray[] = [];
-    
+
     // Find all matches
     let match: RegExpExecArray | null;
     while ((match = regex.exec(testString)) !== null) {
       matches.push({ ...match });
-      
+
       // Prevent infinite loops for patterns like /a*/g
       if (match.index === regex.lastIndex) {
         regex.lastIndex++;
       }
-      
+
       // If the regex is not global, break after first match
       if (!regex.global) break;
     }
 
     return { isValid: true, matches };
   } catch (error) {
-    return { 
-      isValid: false, 
+    return {
+      isValid: false,
       matches: [],
-      error: error instanceof Error ? error.message : 'Invalid regular expression' 
+      error:
+        error instanceof Error ? error.message : 'Invalid regular expression',
     };
   }
 }
@@ -90,30 +92,37 @@ export function explainRegexPattern(pattern: string): Array<{
   }
 
   const explanations: Array<{ component: string; explanation: string }> = [];
-  
+
   // Remove leading and trailing slashes and flags if present
   let cleanPattern = pattern;
   const flagsMatch = pattern.match(/\/([gimsuyd]*)$/);
   let flags = '';
-  
+
   if (pattern.startsWith('/') && flagsMatch) {
     flags = flagsMatch[1];
     cleanPattern = pattern.slice(1, pattern.lastIndexOf('/'));
   }
-  
+
   // Add explanation for flags if present
   if (flags) {
     explanations.push({
       component: `/${flags}`,
-      explanation: explainFlags(flags)
+      explanation: explainFlags(flags),
     });
   }
-  
+
   // Basic regex components to explain
   const components = [
     { regex: /\\d/g, explanation: 'Matches any digit (0-9)' },
-    { regex: /\\w/g, explanation: 'Matches any word character (alphanumeric + underscore)' },
-    { regex: /\\s/g, explanation: 'Matches any whitespace character (spaces, tabs, line breaks)' },
+    {
+      regex: /\\w/g,
+      explanation: 'Matches any word character (alphanumeric + underscore)',
+    },
+    {
+      regex: /\\s/g,
+      explanation:
+        'Matches any whitespace character (spaces, tabs, line breaks)',
+    },
     { regex: /\\b/g, explanation: 'Matches a word boundary' },
     { regex: /\\B/g, explanation: 'Matches a non-word boundary' },
     { regex: /\\n/g, explanation: 'Matches a line break' },
@@ -139,13 +148,29 @@ export function explainRegexPattern(pattern: string): Array<{
     { regex: /\./g, explanation: 'Matches any character except line breaks' },
     { regex: /\^/g, explanation: 'Matches the start of a line' },
     { regex: /\$/g, explanation: 'Matches the end of a line' },
-    { regex: /\*/g, explanation: 'Matches 0 or more of the preceding character' },
-    { regex: /\+/g, explanation: 'Matches 1 or more of the preceding character' },
+    {
+      regex: /\*/g,
+      explanation: 'Matches 0 or more of the preceding character',
+    },
+    {
+      regex: /\+/g,
+      explanation: 'Matches 1 or more of the preceding character',
+    },
     { regex: /\?/g, explanation: 'Matches 0 or 1 of the preceding character' },
     { regex: /\|/g, explanation: 'Acts as an OR operator between expressions' },
-    { regex: /\{(\d+)\}/g, explanation: 'Matches exactly n occurrences of the preceding character' },
-    { regex: /\{(\d+),\}/g, explanation: 'Matches n or more occurrences of the preceding character' },
-    { regex: /\{(\d+),(\d+)\}/g, explanation: 'Matches between n and m occurrences of the preceding character' },
+    {
+      regex: /\{(\d+)\}/g,
+      explanation: 'Matches exactly n occurrences of the preceding character',
+    },
+    {
+      regex: /\{(\d+),\}/g,
+      explanation: 'Matches n or more occurrences of the preceding character',
+    },
+    {
+      regex: /\{(\d+),(\d+)\}/g,
+      explanation:
+        'Matches between n and m occurrences of the preceding character',
+    },
     { regex: /\(\?:/g, explanation: 'Non-capturing group' },
     { regex: /\(\?=/g, explanation: 'Positive lookahead' },
     { regex: /\(\?!/g, explanation: 'Negative lookahead' },
@@ -158,7 +183,7 @@ export function explainRegexPattern(pattern: string): Array<{
     { regex: /\[^\]/g, explanation: 'Negated character class' },
     { regex: /\[a-z\]/g, explanation: 'Character range' },
   ];
-  
+
   // Find and explain each component
   for (const { regex, explanation } of components) {
     const matches = cleanPattern.match(regex);
@@ -166,12 +191,12 @@ export function explainRegexPattern(pattern: string): Array<{
       for (const match of matches) {
         explanations.push({
           component: match,
-          explanation
+          explanation,
         });
       }
     }
   }
-  
+
   return explanations;
 }
 
@@ -182,15 +207,21 @@ export function explainRegexPattern(pattern: string): Array<{
  */
 function explainFlags(flags: string): string {
   const explanations: string[] = [];
-  
-  if (flags.includes('g')) explanations.push('g: Global search (find all matches)');
+
+  if (flags.includes('g'))
+    explanations.push('g: Global search (find all matches)');
   if (flags.includes('i')) explanations.push('i: Case-insensitive search');
-  if (flags.includes('m')) explanations.push('m: Multi-line search (^ and $ match start/end of each line)');
+  if (flags.includes('m'))
+    explanations.push(
+      'm: Multi-line search (^ and $ match start/end of each line)'
+    );
   if (flags.includes('s')) explanations.push('s: Dot (.) matches newlines');
   if (flags.includes('u')) explanations.push('u: Unicode support');
-  if (flags.includes('y')) explanations.push('y: Sticky search (match at current position only)');
-  if (flags.includes('d')) explanations.push('d: Generate indices for substring matches');
-  
+  if (flags.includes('y'))
+    explanations.push('y: Sticky search (match at current position only)');
+  if (flags.includes('d'))
+    explanations.push('d: Generate indices for substring matches');
+
   return explanations.join(', ');
 }
 
@@ -219,31 +250,31 @@ export function highlightMatches(
     matchIndex?: number;
     groupIndex?: number;
   }> = [];
-  
+
   let lastIndex = 0;
-  
+
   // Sort matches by index
   const sortedMatches = [...matches].sort((a, b) => a.index! - b.index!);
-  
+
   for (let i = 0; i < sortedMatches.length; i++) {
     const match = sortedMatches[i];
     const matchIndex = match.index!;
-    
+
     // Add non-matching segment before this match
     if (matchIndex > lastIndex) {
       segments.push({
         text: testString.substring(lastIndex, matchIndex),
-        isMatch: false
+        isMatch: false,
       });
     }
-    
+
     // Add the full match
     segments.push({
       text: match[0],
       isMatch: true,
-      matchIndex: i
+      matchIndex: i,
     });
-    
+
     // Add capturing groups if any (skip the first element which is the full match)
     for (let j = 1; j < match.length; j++) {
       if (match[j] !== undefined) {
@@ -251,17 +282,17 @@ export function highlightMatches(
         // But we could add this information if needed
       }
     }
-    
+
     lastIndex = matchIndex + match[0].length;
   }
-  
+
   // Add any remaining text after the last match
   if (lastIndex < testString.length) {
     segments.push({
       text: testString.substring(lastIndex),
-      isMatch: false
+      isMatch: false,
     });
   }
-  
+
   return segments;
 }

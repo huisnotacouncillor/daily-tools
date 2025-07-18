@@ -1,31 +1,31 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect } from 'react';
 import {
   Card,
   CardContent,
   CardDescription,
   CardHeader,
   CardTitle,
-} from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
-import { Label } from "@/components/ui/label";
+} from '@/components/ui/card';
+import { Input } from '@/components/ui/input';
+import { Textarea } from '@/components/ui/textarea';
+import { Label } from '@/components/ui/label';
 
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Badge } from "@/components/ui/badge";
-import { AlertCircle, CheckCircle, Info } from "lucide-react";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import { Badge } from '@/components/ui/badge';
+import { AlertCircle, CheckCircle, Info } from 'lucide-react';
 import {
   validateRegexPattern,
   testRegexPattern,
   explainRegexPattern,
   highlightMatches,
-} from "@/lib/regex-utils";
+} from '@/lib/regex-utils';
 
 export function RegexValidator() {
-  const [pattern, setPattern] = useState("\\d{3}-\\d{3}-\\d{4}");
+  const [pattern, setPattern] = useState('\\d{3}-\\d{3}-\\d{4}');
   const [testString, setTestString] = useState(
-    "Call me at 123-456-7890 or 987-654-3210"
+    'Call me at 123-456-7890 or 987-654-3210'
   );
-  const [flags, setFlags] = useState("g");
+  const [flags, setFlags] = useState('g');
 
   const [validation, setValidation] = useState<
     ReturnType<typeof validateRegexPattern>
@@ -100,12 +100,12 @@ export function RegexValidator() {
                 <Input
                   id="pattern"
                   value={pattern}
-                  onChange={(e) => setPattern(e.target.value)}
+                  onChange={e => setPattern(e.target.value)}
                   placeholder="Enter regex pattern..."
-                  className={validation.isValid ? "" : "border-red-500"}
+                  className={validation.isValid ? '' : 'border-red-500'}
                   aria-invalid={!validation.isValid}
                   aria-describedby={
-                    validation.error ? "pattern-error" : undefined
+                    validation.error ? 'pattern-error' : undefined
                   }
                 />
                 {validation.error && (
@@ -125,7 +125,7 @@ export function RegexValidator() {
                 <Input
                   id="flags"
                   value={flags}
-                  onChange={(e) => setFlags(e.target.value)}
+                  onChange={e => setFlags(e.target.value)}
                   placeholder="g, i, m, s, u, y, d"
                   className="w-32"
                 />
@@ -139,7 +139,7 @@ export function RegexValidator() {
                 <Textarea
                   id="testString"
                   value={testString}
-                  onChange={(e) => setTestString(e.target.value)}
+                  onChange={e => setTestString(e.target.value)}
                   placeholder="Enter text to test against the pattern..."
                   rows={4}
                 />
@@ -188,11 +188,11 @@ export function RegexValidator() {
                 {testResult.isValid && (
                   <Badge
                     variant={
-                      testResult.matches.length > 0 ? "default" : "secondary"
+                      testResult.matches.length > 0 ? 'default' : 'secondary'
                     }
                   >
                     {testResult.matches.length} match
-                    {testResult.matches.length !== 1 ? "es" : ""}
+                    {testResult.matches.length !== 1 ? 'es' : ''}
                   </Badge>
                 )}
               </CardTitle>
@@ -218,8 +218,8 @@ export function RegexValidator() {
                         key={index}
                         className={
                           segment.isMatch
-                            ? "bg-yellow-200 dark:bg-yellow-800 px-1 rounded"
-                            : ""
+                            ? 'bg-yellow-200 dark:bg-yellow-800 px-1 rounded'
+                            : ''
                         }
                       >
                         {segment.text}
@@ -251,7 +251,7 @@ export function RegexValidator() {
                         </div>
                         {match.length > 1 && (
                           <div className="mt-1 text-xs text-muted-foreground">
-                            Groups:{" "}
+                            Groups:{' '}
                             {match
                               .slice(1)
                               .map((group, i) =>
@@ -259,7 +259,7 @@ export function RegexValidator() {
                                   ? `$${i + 1}: "${group}"`
                                   : `$${i + 1}: undefined`
                               )
-                              .join(", ")}
+                              .join(', ')}
                           </div>
                         )}
                       </div>

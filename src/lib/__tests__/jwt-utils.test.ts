@@ -7,7 +7,7 @@ import {
   getTimeRemaining,
   getTokenAge,
   getAlgorithmDescription,
-  generateSampleJwt
+  generateSampleJwt,
 } from '../jwt-utils';
 
 // Mock Date.now for consistent testing
@@ -25,13 +25,13 @@ describe('decodeJwt', () => {
     const header = { alg: 'HS256', typ: 'JWT' };
     const payload = { sub: '1234567890', name: 'John Doe' };
     const signature = 'signature';
-    
+
     const encodedHeader = btoa(JSON.stringify(header));
     const encodedPayload = btoa(JSON.stringify(payload));
     const token = `${encodedHeader}.${encodedPayload}.${signature}`;
 
     const result = decodeJwt(token);
-    
+
     expect(result.isValid).toBe(true);
     expect(result.decoded?.header).toEqual(header);
     expect(result.decoded?.payload).toEqual(payload);
@@ -47,7 +47,9 @@ describe('decodeJwt', () => {
   it('should handle invalid token format', () => {
     const result = decodeJwt('invalid.token');
     expect(result.isValid).toBe(false);
-    expect(result.error).toBe('Invalid token format. JWT should have three parts separated by dots.');
+    expect(result.error).toBe(
+      'Invalid token format. JWT should have three parts separated by dots.'
+    );
   });
 
   it('should handle malformed base64', () => {
@@ -171,12 +173,16 @@ describe('getAlgorithmDescription', () => {
   it('should return correct description for known algorithms', () => {
     expect(getAlgorithmDescription('HS256')).toBe('HMAC with SHA-256');
     expect(getAlgorithmDescription('RS256')).toBe('RSA Signature with SHA-256');
-    expect(getAlgorithmDescription('ES256')).toBe('ECDSA Signature with SHA-256');
+    expect(getAlgorithmDescription('ES256')).toBe(
+      'ECDSA Signature with SHA-256'
+    );
     expect(getAlgorithmDescription('none')).toBe('No digital signature or MAC');
   });
 
   it('should return unknown message for unknown algorithm', () => {
-    expect(getAlgorithmDescription('UNKNOWN')).toBe('Unknown algorithm: UNKNOWN');
+    expect(getAlgorithmDescription('UNKNOWN')).toBe(
+      'Unknown algorithm: UNKNOWN'
+    );
   });
 });
 
