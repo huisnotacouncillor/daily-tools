@@ -1,6 +1,8 @@
 import { describe, it, expect, beforeEach, vi } from 'vitest';
 import {
   decodeJwt,
+  encodeJwt,
+  verifyJwtSignature,
   isTokenExpired,
   isTokenNotYetValid,
   formatTimestamp,
@@ -8,6 +10,9 @@ import {
   getTokenAge,
   getAlgorithmDescription,
   generateSampleJwt,
+  getDefaultJwtHeader,
+  getDefaultJwtPayload,
+  getSupportedAlgorithms,
 } from '../jwt-utils';
 
 // Mock Date.now for consistent testing
@@ -199,5 +204,159 @@ describe('generateSampleJwt', () => {
     expect(result.isValid).toBe(true);
     expect(result.decoded?.header.alg).toBe('HS256');
     expect(result.decoded?.payload.name).toBe('John Doe');
+  });
+});
+
+describe('encodeJwt', () => {
+  const header = { alg: 'HS256', typ: 'JWT' };
+  const payload = { sub: '1234567890', name: 'John Doe', iat: mockTimestamp };
+  const secret = 'test-secret-key';
+
+  it('should encode a JWT token with HS256', () => {
+    const token = encodeJwt(header, payload, secret, 'HS256');
+    const parts = token.split('.');
+    expect(parts.length).toBe(3);
+
+    // Verify the token can be decoded
+    const decoded = decodeJwt(token);
+    expect(decoded.isValid).toBe(true);
+    expect(decoded.decoded?.header.alg).toBe('HS256');
+    expect(decoded.decoded?.payload.name).toBe('John Doe');
+  });
+
+  it('should encode a JWT token with HS384', () => {
+    const token = encodeJwt(header, payload, secret, 'HS384');
+    const parts = token.split('.');
+    expect(parts.length).toBe(3);
+
+    const decoded = decodeJwt(token);
+    expect(decoded.isValid).toBe(true);
+    expect(decoded.decoded?.header.alg).toBe('HS384');
+  });
+
+  it('should encode a JWT token with HS512', () => {
+    const token = encodeJwt(header, payload, secret, 'HS512');
+    const parts = token.split('.');
+    expect(parts.length).toBe(3);
+
+    const decoded = decodeJwt(token);
+    expect(decoded.isValid).toBe(true);
+    expect(decoded.decoded?.header.alg).toBe('HS512');
+  });
+
+  it('should set default algorithm to HS256', () => {
+    const token = encodeJwt(header, payload, secret);
+    const decoded = decodeJwt(token);
+    expect(decoded.decoded?.header.alg).toBe('HS256');
+  });
+
+  it('should add typ field if not present', () => {
+    const headerWithoutTyp = { alg: 'HS256' };
+    const token = encodeJwt(headerWithoutTyp, payload, secret);
+    const decoded = decodeJwt(token);
+    expect(decoded.decoded?.header.typ).toBe('JWT');
+  });
+
+  it('should preserve existing typ field', () => {
+    const headerWithTyp = { alg: 'HS256', typ: 'custom' };
+    const token = encodeJwt(headerWithTyp, payload, secret);
+    const decoded = decodeJwt(token);
+    expect(decoded.decoded?.header.typ).toBe('custom');
+  });
+});
+
+describe('verifyJwtSignature', () => {
+  const header = { alg: 'HS256', typ: 'JWT' };
+  const payload = { sub: '1234567890', name: 'John Doe', iat: mockTimestamp };
+  const secret = 'test-secret-key';
+  const wrongSecret = 'wrong-secret';
+
+  it('should verify a valid JWT signature', () => {
+    const token = encodeJwt(header, payload, secret);
+    const result = verifyJwtSignature(token, secret);
+    expect(result.isValid).toBe(true);
+    expect(result.error).toBeUndefined();
+  });
+
+  it('should reject an invalid JWT signature', () => {
+    const token = encodeJwt(header, payload, secret);
+    const result = verifyJwtSignature(token, wrongSecret);
+    expect(result.isValid).toBe(false);
+    expect(result.error).toBe('Signature verification failed');
+  });
+
+  it('should handle empty token', () => {
+    const result = verifyJwtSignature('', secret);
+    expect(result.isValid).toBe(false);
+    expect(result.error).toBe('Token and secret are required');
+  });
+
+  it('should handle empty secret', () => {
+    const token = encodeJwt(header, payload, secret);
+    const result = verifyJwtSignature(token, '');
+    expect(result.isValid).toBe(false);
+    expect(result.error).toBe('Token and secret are required');
+  });
+
+  it('should handle invalid token format', () => {
+    const result = verifyJwtSignature('invalid.token', secret);
+    expect(result.isValid).toBe(false);
+    expect(result.error).toBe('Invalid token format');
+  });
+
+  it('should handle token without algorithm', () => {
+    const headerWithoutAlg = { typ: 'JWT' };
+    const encodedHeader = btoa(JSON.stringify(headerWithoutAlg));
+    const encodedPayload = btoa(JSON.stringify(payload));
+    const invalidToken = `${encodedHeader}.${encodedPayload}.signature`;
+
+    const result = verifyJwtSignature(invalidToken, secret);
+    expect(result.isValid).toBe(false);
+    expect(result.error).toBe('No algorithm specified in header');
+  });
+
+  it('should verify tokens with different algorithms', () => {
+    const algorithms = ['HS256', 'HS384', 'HS512'];
+
+    algorithms.forEach(alg => {
+      const token = encodeJwt({ ...header, alg }, payload, secret, alg);
+      const result = verifyJwtSignature(token, secret);
+      expect(result.isValid).toBe(true);
+    });
+  });
+});
+
+describe('getDefaultJwtHeader', () => {
+  it('should return default header with HS256 algorithm', () => {
+    const header = getDefaultJwtHeader();
+    expect(header.alg).toBe('HS256');
+    expect(header.typ).toBe('JWT');
+  });
+});
+
+describe('getDefaultJwtPayload', () => {
+  it('should return default payload with basic claims', () => {
+    const payload = getDefaultJwtPayload();
+    expect(payload.sub).toBe('1234567890');
+    expect(payload.name).toBe('John Doe');
+    expect(payload.iat).toBeTypeOf('number');
+    expect(payload.exp).toBeTypeOf('number');
+    expect(payload.exp).toBeGreaterThan(payload.iat!);
+  });
+});
+
+describe('getSupportedAlgorithms', () => {
+  it('should return list of supported algorithms', () => {
+    const algorithms = getSupportedAlgorithms();
+    expect(algorithms).toContain('HS256');
+    expect(algorithms).toContain('HS384');
+    expect(algorithms).toContain('HS512');
+    expect(algorithms).toContain('none');
+  });
+
+  it('should return an array', () => {
+    const algorithms = getSupportedAlgorithms();
+    expect(Array.isArray(algorithms)).toBe(true);
+    expect(algorithms.length).toBeGreaterThan(0);
   });
 });
