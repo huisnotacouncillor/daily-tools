@@ -4,6 +4,10 @@
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {
+  --default-font-size: 0.875rem; /* 14px */
+  --default-font-weight: 400;
+  --font-size-base: var(--default-font-size);
+  --font-weight-normal: var(--default-font-weight);
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);
   --radius-lg: var(--radius);
@@ -110,11 +114,51 @@
   --sidebar-ring: oklch(0.551 0.027 264.364);
 }
 
+:root {
+  --bg: #fff;
+  --text: #222;
+}
+[data-theme='dark'] {
+  --bg: #222;
+  --text: #fff;
+}
+body {
+  background: var(--bg);
+  color: var(--text);
+  transition:
+    background-color 0.5s cubic-bezier(0.4, 0, 0.2, 1),
+    color 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* 让常用 Tailwind 变量类也有平滑过渡 */
+.bg-background,
+.bg-card,
+.bg-muted,
+.bg-accent,
+.bg-primary,
+.bg-secondary,
+.bg-popover,
+.bg-sidebar {
+  transition: background-color 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.text-foreground,
+.text-primary,
+.text-secondary,
+.text-muted-foreground,
+.text-accent-foreground,
+.text-card-foreground,
+.text-popover-foreground,
+.text-sidebar-foreground {
+  transition: color 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
 @layer base {
   * {
     @apply border-border outline-ring/50;
   }
   body {
     @apply bg-background text-foreground;
+    font-size: var(--default-font-size);
+    font-weight: var(--default-font-weight);
   }
 }

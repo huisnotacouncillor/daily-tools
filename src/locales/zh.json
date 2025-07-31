@@ -1,0 +1,219 @@
+{
+  "welcome": "欢迎",
+  "theme": "主题",
+  "language": "语言",
+  "light": "明亮",
+  "dark": "黑暗",
+  "system": "系统",
+  "logout": "退出登录",
+  "workspace": "工作空间",
+  "workspaces": "工作空间",
+  "createWorkspace": "创建工作空间",
+  "auth": {
+    "login": "登录",
+    "register": "注册",
+    "login.subtitle": "登录您的账户",
+    "register.subtitle": "创建新账户",
+    "login.description": "使用您的邮箱和密码登录",
+    "register.description": "填写以下信息创建您的账户",
+    "email": "邮箱",
+    "email.placeholder": "请输入邮箱",
+    "password": "密码",
+    "password.placeholder": "请输入密码",
+    "confirmPassword": "确认密码",
+    "confirmPassword.placeholder": "请再次输入密码",
+    "username": "用户名",
+    "username.placeholder": "请输入用户名",
+    "name": "姓名",
+    "name.placeholder": "请输入姓名",
+    "login.loading": "登录中...",
+    "login.error": "登录失败，请检查邮箱和密码",
+    "register.loading": "注册中...",
+    "register.error": "注册失败，请稍后重试",
+    "login.switchToRegister": "没有账户？点击注册",
+    "login.switchToLogin": "已有账户？点击登录"
+  },
+  "validation": {
+    "email": {
+      "invalid": "请输入有效的邮箱地址"
+    },
+    "password": {
+      "minLength": "密码至少需要6个字符"
+    },
+    "username": {
+      "minLength": "用户名至少需要3个字符",
+      "maxLength": "用户名不能超过20个字符"
+    },
+    "name": {
+      "minLength": "姓名至少需要2个字符",
+      "maxLength": "姓名不能超过50个字符"
+    },
+    "confirmPassword": {
+      "mismatch": "密码不匹配"
+    }
+  },
+  "nav": {
+    "inbox": {
+      "label": "收件箱",
+      "desc": "查看所有新问题"
+    },
+    "myissues": {
+      "label": "我的问题",
+      "desc": "我负责的问题"
+    },
+    "cycles": {
+      "label": "周期",
+      "desc": "团队协作看板"
+    },
+    "teams": {
+      "label": "团队",
+      "desc": "团队概览"
+    },
+    "projects": {
+      "label": "项目",
+      "desc": "项目概览"
+    },
+    "roadmaps": {
+      "label": "路线图",
+      "desc": "战略规划"
+    }
+  },
+  "sidebar": {
+    "show": "显示侧边栏",
+    "hide": "隐藏侧边栏",
+    "showLeft": "显示左侧边栏",
+    "hideLeft": "隐藏左侧边栏"
+  },
+  "inbox": {
+    "title": "收件箱",
+    "subtitle": "查看所有新问题",
+    "searchPlaceholder": "搜索问题...",
+    "messagesTitle": "消息列表",
+    "details": "消息详情",
+    "selectMessage": "选择一条消息查看详情",
+    "sortBy": "排序方式",
+    "sortByOptions": {
+      "date": "日期",
+      "priority": "优先级",
+      "status": "状态"
+    },
+    "deleteAll": "删除所有通知",
+    "deleteAllRead": "删除所有已读通知",
+    "deleteAllCompleted": "删除所有已完成通知",
+    "confirmDeleteAll": "确定要删除所有通知吗？",
+    "confirmDeleteAllRead": "确定要删除所有已读通知吗？",
+    "confirmDeleteAllCompleted": "确定要删除所有已完成通知吗？"
+  },
+  "myissues": {
+    "title": "我的问题",
+    "subtitle": "我负责的问题",
+    "searchPlaceholder": "搜索我的问题..."
+  },
+  "projects": {
+    "targetDate": "目标日期",
+    "progress": "项目进度",
+    "issuesTab": "问题",
+    "briefTab": "简报",
+    "updatesTab": "更新",
+    "briefTitle": "项目简报",
+    "whyTitle": "为什么做这个项目？",
+    "whyContent": "Momentum 是一个现代化的项目管理工具，旨在为团队提供简洁、高效的工作体验。我们希望通过这个项目，帮助团队更好地协作，提高工作效率。",
+    "whatTitle": "我们要做什么？",
+    "whatList": {
+      "1": "构建用户友好的界面和交互体验",
+      "2": "实现核心的项目管理功能",
+      "3": "提供灵活的配置和定制选项",
+      "4": "确保系统的稳定性和可扩展性"
+    },
+    "successTitle": "成功标准",
+    "successList": {
+      "1": "用户满意度达到 90% 以上",
+      "2": "系统响应时间小于 200ms",
+      "3": "支持 1000+ 并发用户",
+      "4": "代码覆盖率超过 80%"
+    },
+    "status": {
+      "Backlog": "待办池",
+      "Planned": "待处理",
+      "InProgress": "进行中",
+      "Completed": "已完成",
+      "Cancelled": "已取消"
+    }
+  },
+  "cycles": {
+    "burndown": "燃起图",
+    "progress": "完成进度",
+    "column": {
+      "Backlog": "待办池",
+      "Todo": "待处理",
+      "InProgress": "进行中",
+      "InReview": "评审中",
+      "Done": "已完成",
+      "Testing": "测试中",
+      "Deployment": "已部署"
+    }
+  },
+  "roadmaps": {
+    "title": "路线图",
+    "subtitle": "高层次的战略规划视图",
+    "timelineTitle": "项目时间轴",
+    "completed": "已完成",
+    "active": "进行中",
+    "planned": "计划中"
+  },
+  "teams": {
+    "title": "团队"
+  },
+  "common": {
+    "filter": "筛选",
+    "status": "状态",
+    "title": "标题",
+    "project": "项目",
+    "priority": "优先级",
+    "assignee": "负责人",
+    "createdAt": "创建时间",
+    "backlog": "待办池",
+    "unassigned": "未分配",
+    "noProject": "无项目"
+  },
+  "status": {
+    "0": "Backlog",
+    "1": "Todo",
+    "2": "In Progress",
+    "3": "In Review",
+    "4": "Done",
+    "5": "Canceled"
+  },
+  "priority": {
+    "0": "No priority",
+    "1": "Low",
+    "2": "Medium",
+    "3": "High",
+    "4": "Urgent"
+  },
+  "issue": {
+    "newIssue": "新建问题",
+    "shortcutC": "快捷键: C",
+    "issueTitle": "问题标题",
+    "addDescription": "添加描述...",
+    "createMore": "创建更多",
+    "createIssue": "创建问题"
+  },
+  "testauth": {
+    "title": "认证测试页面",
+    "currentUser": "当前用户信息",
+    "currentUserDesc": "显示当前登录用户的基本信息",
+    "authStatus": "认证状态",
+    "loggedIn": "已登录",
+    "userId": "用户ID",
+    "avatar": "头像",
+    "notLoggedIn": "未登录",
+    "userList": "用户列表",
+    "userListDesc": "从后端 API 获取的用户列表（需要认证）",
+    "loading": "加载中...",
+    "loadFailed": "加载用户列表失败",
+    "loadFailedTip": "可能需要重新登录或检查网络连接",
+    "total": "总数: {{count}}",
+    "noUserData": "暂无用户数据"
+  }
+}

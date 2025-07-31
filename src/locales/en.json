@@ -1,0 +1,219 @@
+{
+  "welcome": "Welcome",
+  "theme": "Theme",
+  "language": "Language",
+  "light": "Light",
+  "dark": "Dark",
+  "system": "System",
+  "logout": "Logout",
+  "workspace": "Workspace",
+  "workspaces": "Workspaces",
+  "createWorkspace": "Create workspace",
+  "auth": {
+    "login": "Login",
+    "register": "Register",
+    "login.subtitle": "Sign in to your account",
+    "register.subtitle": "Create a new account",
+    "login.description": "Sign in with your email and password",
+    "register.description": "Fill in the information below to create your account",
+    "email": "Email",
+    "email.placeholder": "Enter your email",
+    "password": "Password",
+    "password.placeholder": "Enter your password",
+    "confirmPassword": "Confirm Password",
+    "confirmPassword.placeholder": "Re-enter your password",
+    "username": "Username",
+    "username.placeholder": "Enter your username",
+    "name": "Name",
+    "name.placeholder": "Enter your name",
+    "login.loading": "Signing in...",
+    "login.error": "Login failed, please check your email and password",
+    "register.loading": "Registering...",
+    "register.error": "Registration failed, please try again later",
+    "login.switchToRegister": "No account? Click to register",
+    "login.switchToLogin": "Already have an account? Click to login"
+  },
+  "validation": {
+    "email": {
+      "invalid": "Please enter a valid email address"
+    },
+    "password": {
+      "minLength": "Password must be at least 6 characters"
+    },
+    "username": {
+      "minLength": "Username must be at least 3 characters",
+      "maxLength": "Username cannot exceed 20 characters"
+    },
+    "name": {
+      "minLength": "Name must be at least 2 characters",
+      "maxLength": "Name cannot exceed 50 characters"
+    },
+    "confirmPassword": {
+      "mismatch": "Passwords do not match"
+    }
+  },
+  "nav": {
+    "inbox": {
+      "label": "Inbox",
+      "desc": "View all new issues"
+    },
+    "myissues": {
+      "label": "My Issues",
+      "desc": "Issues I am responsible for"
+    },
+    "cycles": {
+      "label": "Cycles",
+      "desc": "Team Kanban"
+    },
+    "teams": {
+      "label": "Teams",
+      "desc": "Teams Overview"
+    },
+    "projects": {
+      "label": "Projects",
+      "desc": "Project Overview"
+    },
+    "roadmaps": {
+      "label": "Roadmaps",
+      "desc": "Strategic Planning"
+    }
+  },
+  "sidebar": {
+    "show": "Show sidebar",
+    "hide": "Hide sidebar",
+    "showLeft": "Show left sidebar",
+    "hideLeft": "Hide left sidebar"
+  },
+  "inbox": {
+    "title": "Inbox",
+    "subtitle": "View all new issues",
+    "searchPlaceholder": "Search issues...",
+    "messagesTitle": "Messages",
+    "details": "Message Details",
+    "selectMessage": "Select a message to view details",
+    "sortBy": "Sort by",
+    "sortByOptions": {
+      "date": "Date",
+      "priority": "Priority",
+      "status": "Status"
+    },
+    "deleteAll": "Delete all notifications",
+    "deleteAllRead": "Delete all read notifications",
+    "deleteAllCompleted": "Delete all completed notifications",
+    "confirmDeleteAll": "Are you sure you want to delete all notifications?",
+    "confirmDeleteAllRead": "Are you sure you want to delete all read notifications?",
+    "confirmDeleteAllCompleted": "Are you sure you want to delete all completed notifications?"
+  },
+  "myissues": {
+    "title": "My Issues",
+    "subtitle": "Issues I am responsible for",
+    "searchPlaceholder": "Search my issues..."
+  },
+  "projects": {
+    "targetDate": "Target Date",
+    "progress": "Project Progress",
+    "issuesTab": "Issues",
+    "briefTab": "Brief",
+    "updatesTab": "Updates",
+    "briefTitle": "Project Brief",
+    "whyTitle": "Why do this project?",
+    "whyContent": "Momentum is a modern project management tool designed to provide teams with a simple and efficient work experience. We hope this project will help teams collaborate better and improve work efficiency.",
+    "whatTitle": "What are we going to do?",
+    "whatList": {
+      "1": "Build a user-friendly interface and interaction experience",
+      "2": "Implement core project management features",
+      "3": "Provide flexible configuration and customization options",
+      "4": "Ensure system stability and scalability"
+    },
+    "successTitle": "Success Criteria",
+    "successList": {
+      "1": "User satisfaction above 90%",
+      "2": "System response time less than 200ms",
+      "3": "Support 1000+ concurrent users",
+      "4": "Code coverage over 80%"
+    },
+    "status": {
+      "Backlog": "Backlog",
+      "Planned": "Planned",
+      "InProgress": "In Progress",
+      "Completed": "Completed",
+      "Cancelled": "Cancelled"
+    }
+  },
+  "cycles": {
+    "burndown": "Burndown Chart",
+    "progress": "Progress",
+    "column": {
+      "Backlog": "Backlog",
+      "Todo": "Todo",
+      "InProgress": "In Progress",
+      "InReview": "In Review",
+      "Done": "Done",
+      "Testing": "Testing",
+      "Deployment": "Deployment"
+    }
+  },
+  "roadmaps": {
+    "title": "Roadmaps",
+    "subtitle": "High-level strategic planning view",
+    "timelineTitle": "Project Timeline",
+    "completed": "Completed",
+    "active": "Active",
+    "planned": "Planned"
+  },
+  "teams": {
+    "title": "Teams"
+  },
+  "common": {
+    "filter": "Filter",
+    "status": "Status",
+    "title": "Title",
+    "project": "Project",
+    "priority": "Priority",
+    "assignee": "Assignee",
+    "createdAt": "Created At",
+    "backlog": "Backlog",
+    "unassigned": "Unassigned",
+    "noProject": "No project"
+  },
+  "status": {
+    "0": "Backlog",
+    "1": "Todo",
+    "2": "In Progress",
+    "3": "In Review",
+    "4": "Done",
+    "5": "Canceled"
+  },
+  "priority": {
+    "0": "No priority",
+    "1": "Low",
+    "2": "Medium",
+    "3": "High",
+    "4": "Urgent"
+  },
+  "issue": {
+    "newIssue": "New Issue",
+    "shortcutC": "Shortcut: C",
+    "issueTitle": "Issue title",
+    "addDescription": "Add description...",
+    "createMore": "Create more",
+    "createIssue": "Create issue"
+  },
+  "testauth": {
+    "title": "Auth Test Page",
+    "currentUser": "Current User Info",
+    "currentUserDesc": "Displays basic info of the currently logged-in user",
+    "authStatus": "Auth Status",
+    "loggedIn": "Logged In",
+    "userId": "User ID",
+    "avatar": "Avatar",
+    "notLoggedIn": "Not logged in",
+    "userList": "User List",
+    "userListDesc": "User list fetched from backend API (requires authentication)",
+    "loading": "Loading...",
+    "loadFailed": "Failed to load user list",
+    "loadFailedTip": "You may need to re-login or check your network connection",
+    "total": "Total: {{count}}",
+    "noUserData": "No user data available"
+  }
+}
