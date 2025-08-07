@@ -1,16 +1,9 @@
-import {
-  createContext,
-  useContext,
-  useEffect,
-  useState,
-  type ReactNode,
-} from 'react';
+import { useEffect, useState, type ReactNode } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { SWRConfig } from 'swr';
-import { authAPI, authUtils, useAuth, swrConfig } from '../services/api';
-import type { AuthUser, AuthContextType } from '../types';
-
-const AuthContext = createContext<AuthContextType | undefined>(undefined);
+import { authAPI, authUtils, useAuth, swrConfig } from '@/services';
+import type { AuthUser, AuthContextType } from '@/types';
+import { AuthContext } from '@/contexts';
 
 export function AuthProvider({ children }: { children: ReactNode }) {
   const [user, setUser] = useState<AuthUser | null>(null);
@@ -22,6 +15,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
   useEffect(() => {
     const checkAuth = async () => {
+      if (location.pathname === '/login') return;
       const token = authUtils.getAccessToken();
 
       if (token && authUtils.isAuthenticated()) {
@@ -46,12 +40,12 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
   // 当 SWR 数据更新时，同步用户状态
   useEffect(() => {
-    if (authUser) {
+    if (authUser && authUser.data !== user) {
       setUser(authUser.data ?? null);
-    } else if (isError) {
+    } else if (isError && user !== null) {
       setUser(null);
     }
-  }, [authUser, isError]);
+  }, [authUser, isError, user]);
 
   const login = async (email: string, password: string) => {
     const response = await authAPI.login({ email, password });
@@ -60,7 +54,10 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         response.data.access_token,
         response.data.refresh_token
       );
-      setUser(response.data.user);
+      const profileResult = await authAPI.getProfile();
+      if (profileResult.data) {
+        setUser(profileResult.data);
+      }
     }
     await mutate(); // 重新验证用户信息
     navigate('/');
@@ -141,12 +138,4 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       <AuthContext.Provider value={value}>{children}</AuthContext.Provider>
     </SWRConfig>
   );
-}
-
-export function useAuthContext() {
-  const context = useContext(AuthContext);
-  if (context === undefined) {
-    throw new Error('useAuthContext must be used within an AuthProvider');
-  }
-  return context;
 }

@@ -1,31 +1,12 @@
-/* eslint-disable react-refresh/only-export-components */
-import React, {
-  createContext,
-  useContext,
-  useState,
-  type ReactNode,
-} from 'react';
+import React, { useState, type ReactNode } from 'react';
+import { SidebarContext } from '@/contexts';
+import type { SidebarContextType } from '@/types';
 
 interface SidebarProviderProps {
   children: ReactNode;
   defaultLeftSidebarVisible?: boolean;
   defaultRightSidebarVisible?: boolean;
 }
-
-interface SidebarContextType {
-  leftSidebarVisible: boolean;
-  rightSidebarVisible: boolean;
-  toggleLeftSidebar: () => void;
-  toggleRightSidebar: () => void;
-  setLeftSidebarVisible: (visible: boolean) => void;
-  setRightSidebarVisible: (visible: boolean) => void;
-  showLeftSidebar: () => void;
-  hideLeftSidebar: () => void;
-  showRightSidebar: () => void;
-  hideRightSidebar: () => void;
-}
-
-const SidebarContext = createContext<SidebarContextType | undefined>(undefined);
 
 export const SidebarProvider: React.FC<SidebarProviderProps> = ({
   children,
@@ -80,11 +61,3 @@ export const SidebarProvider: React.FC<SidebarProviderProps> = ({
     <SidebarContext.Provider value={value}>{children}</SidebarContext.Provider>
   );
 };
-
-export function useSidebar() {
-  const context = useContext(SidebarContext);
-  if (!context) {
-    throw new Error('useSidebar must be used within a SidebarProvider');
-  }
-  return context;
-}

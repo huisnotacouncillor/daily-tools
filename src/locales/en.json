@@ -10,28 +10,42 @@
   "workspaces": "Workspaces",
   "createWorkspace": "Create workspace",
   "auth": {
-    "login": "Login",
-    "register": "Register",
-    "login.subtitle": "Sign in to your account",
-    "register.subtitle": "Create a new account",
-    "login.description": "Sign in with your email and password",
-    "register.description": "Fill in the information below to create your account",
-    "email": "Email",
-    "email.placeholder": "Enter your email",
-    "password": "Password",
-    "password.placeholder": "Enter your password",
-    "confirmPassword": "Confirm Password",
-    "confirmPassword.placeholder": "Re-enter your password",
-    "username": "Username",
-    "username.placeholder": "Enter your username",
-    "name": "Name",
-    "name.placeholder": "Enter your name",
-    "login.loading": "Signing in...",
-    "login.error": "Login failed, please check your email and password",
-    "register.loading": "Registering...",
-    "register.error": "Registration failed, please try again later",
-    "login.switchToRegister": "No account? Click to register",
-    "login.switchToLogin": "Already have an account? Click to login"
+    "login": {
+      "title": "Login",
+      "subtitle": "Sign in to your account",
+      "description": "Sign in with your email and password",
+      "loading": "Signing in...",
+      "error": "Login failed, please check your email and password",
+      "switchToRegister": "No account? Click to register",
+      "switchToLogin": "Already have an account? Click to login"
+    },
+    "register": {
+      "title": "Register",
+      "subtitle": "Create a new account",
+      "description": "Fill in the information below to create your account",
+      "loading": "Registering...",
+      "error": "Registration failed, please try again later"
+    },
+    "email": {
+      "label": "Email",
+      "placeholder": "Enter your email"
+    },
+    "password": {
+      "label": "Password",
+      "placeholder": "Enter your password"
+    },
+    "confirmPassword": {
+      "label": "Confirm Password",
+      "placeholder": "Re-enter your password"
+    },
+    "username": {
+      "label": "Username",
+      "placeholder": "Enter your username"
+    },
+    "name": {
+      "label": "Name",
+      "placeholder": "Enter your name"
+    }
   },
   "validation": {
     "email": {
@@ -162,7 +176,9 @@
     "planned": "Planned"
   },
   "teams": {
-    "title": "Teams"
+    "title": "Teams",
+    "assignee": "Lead",
+    "status": "Status"
   },
   "common": {
     "filter": "Filter",

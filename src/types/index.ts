@@ -3,6 +3,7 @@ export type { ApiError, ApiResponse, PaginatedResponse } from './api';
 
 // Theme types
 export type { Theme, ThemeContextType, ThemeProviderProps } from './theme';
+export type { SidebarContextType } from './layout';
 
 // Auth types
 export type {

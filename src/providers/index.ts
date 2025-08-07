@@ -1,8 +1,8 @@
 // Auth provider
-export { AuthProvider, useAuthContext } from './auth';
+export { AuthProvider } from './auth';
 
 // Theme provider
-export { ThemeProvider, useTheme } from './theme';
+export { ThemeProvider } from './theme';
 
 // Sidebar provider
-export { SidebarProvider, useSidebar } from './sidebar';
+export { SidebarProvider } from './sidebar';

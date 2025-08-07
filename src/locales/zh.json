@@ -162,7 +162,9 @@
     "planned": "计划中"
   },
   "teams": {
-    "title": "团队"
+    "title": "团队",
+    "assignee": "责任人",
+    "status": "状态"
   },
   "common": {
     "filter": "筛选",

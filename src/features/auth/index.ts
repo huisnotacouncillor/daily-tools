@@ -1,15 +1,7 @@
 // Auth components
-export { ProtectedRoute } from './components/ProtectedRoute';
-export { UserMenu } from './components/UserMenu';
-export { LoginForm } from './components/LoginForm';
-export { RegisterForm } from './components/RegisterForm';
-export { WorkspaceSwitcher } from './components/WorkspaceSwitcher';
-export { WorkspaceAvatar } from './components/WorkspaceAvatar';
-
-// Types
-export type {
-  AuthUser,
-  LoginRequest,
-  RegisterRequest,
-  AuthContextType,
-} from '../../types/auth';
+export { ProtectedRoute } from './components/protected-route';
+export { UserMenu } from './components/user-menu';
+export { LoginForm } from './components/login-form';
+export { RegisterForm } from './components/register-form';
+export { WorkspaceSwitcher } from '../../layouts/root-layout/workspace-switcher';
+export { WorkspaceAvatar } from './components/workspace-avatar';

@@ -175,17 +175,19 @@ export const labelAPI = {
 // SWR hooks
 export const useAuth = () => {
   const { data, error, mutate } = useSWR<ApiResponse<AuthUser>>(
-    '/auth/profile',
+    authUtils.isAuthenticated() ? '/auth/profile' : null,
     authFetcher,
     {
       ...swrConfig,
       revalidateOnMount: false,
+      revalidateOnFocus: false,
+      dedupingInterval: 10000, // 10秒内不重复请求
     }
   );
 
   return {
     user: data,
-    isLoading: !error && !data,
+    isLoading: authUtils.isAuthenticated() && !error && !data,
     isError: error,
     mutate,
   };
