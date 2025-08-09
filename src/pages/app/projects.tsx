@@ -4,7 +4,7 @@ import {
   ProjectPanel,
   ProjectList,
   ProjectFilter,
-} from '@features/projects';
+} from '@/features/workspace/projects';
 import { useState } from 'react';
 import type { Project } from '@/types';
 import { ProjectStatus } from '@/types/enum';

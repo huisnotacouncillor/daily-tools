@@ -1,5 +1,5 @@
 import { PageLayout } from '@/layouts/page-layout';
-import { TeamHeader, TeamList, TeamFilter } from '@features/teams';
+import { TeamHeader, TeamList, TeamFilter } from '@/features/workspace/teams';
 import { useState } from 'react';
 import type { Team } from '@/types';
 

@@ -38,3 +38,6 @@ export type { Roadmap } from './roadmap';
 
 // Issue types
 export type { Issue } from './issue';
+
+// Label types
+export type { Label } from './label';

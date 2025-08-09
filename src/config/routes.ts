@@ -3,50 +3,62 @@ import type { RouteConfig } from '@/types/routing';
 
 // 懒加载组件
 const Login = lazy(() =>
-  import('@/pages/login').then(module => ({
+  import('@/pages/public/login').then(module => ({
     default: module.Login,
   }))
 );
 
 const TestAuth = lazy(() =>
-  import('@/pages/test-auth').then(module => ({
+  import('@/pages/public/test-auth').then(module => ({
     default: module.TestAuth,
   }))
 );
 
 const Inbox = lazy(() =>
-  import('@/pages/inbox').then(module => ({
+  import('@/pages/app/inbox').then(module => ({
     default: module.Inbox,
   }))
 );
 
 const MyIssues = lazy(() =>
-  import('@/pages/my-issues').then(module => ({
+  import('@/pages/app/my-issues').then(module => ({
     default: module.MyIssues,
   }))
 );
 
 const Cycles = lazy(() =>
-  import('@/pages/cycles').then(module => ({
+  import('@/pages/app/cycles').then(module => ({
     default: module.Cycles,
   }))
 );
 
 const Teams = lazy(() =>
-  import('@/pages/teams').then(module => ({
+  import('@/pages/app/teams').then(module => ({
     default: module.Teams,
   }))
 );
 
 const Projects = lazy(() =>
-  import('@/pages/projects').then(module => ({
+  import('@/pages/app/projects').then(module => ({
     default: module.Projects,
   }))
 );
 
 const Roadmaps = lazy(() =>
-  import('@/pages/roadmaps').then(module => ({
+  import('@/pages/app/roadmaps').then(module => ({
     default: module.Roadmaps,
+  }))
+);
+
+const IssueLabels = lazy(() =>
+  import('@/pages/admin/issue-labels').then(module => ({
+    default: module.Labels,
+  }))
+);
+
+const ProjectLabels = lazy(() =>
+  import('@/pages/admin/project-labels').then(module => ({
+    default: module.Labels,
   }))
 );
 
@@ -87,6 +99,14 @@ export const protectedRoutes: RouteConfig[] = [
   {
     path: '/roadmaps/*',
     element: Roadmaps,
+  },
+  {
+    path: '/settings/issue-labels',
+    element: IssueLabels,
+  },
+  {
+    path: '/settings/project-labels',
+    element: ProjectLabels,
   },
   // 默认路由
   {

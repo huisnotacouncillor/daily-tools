@@ -55,3 +55,9 @@ export enum NotificationStatus {
   Read = 'read',
   Archived = 'archived',
 }
+
+// 标签等级
+export enum LabelLevel {
+  Project = 'Project',
+  Issue = 'Issue',
+}

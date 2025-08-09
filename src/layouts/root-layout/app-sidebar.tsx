@@ -25,6 +25,7 @@ import {
 } from '@ui/sidebar';
 import { ScrollArea } from '@ui/scroll-area';
 import { NavTop } from './nav-top';
+import { NavIssues } from './nav-issues';
 import { WorkspaceSwitcher } from './workspace-switcher';
 
 // This is sample data.
@@ -104,6 +105,43 @@ const data = {
       ],
     },
   ],
+  navIssues: [
+    {
+      title: 'Issues',
+      url: '/settings',
+      icon: SquareTerminal,
+      items: [
+        {
+          title: 'Labels',
+          url: '/settings/issue-labels',
+          icon: PieChart,
+        },
+        {
+          title: 'Cycles',
+          url: '/cycles',
+        },
+        {
+          title: 'Roadmaps',
+          url: '/roadmaps',
+        },
+      ],
+    },
+    {
+      title: 'Projects',
+      url: '/projects',
+      icon: Bot,
+      items: [
+        {
+          title: 'Labels',
+          url: '/settings/project-labels',
+        },
+        {
+          title: 'Team Settings',
+          url: '/teams/settings',
+        },
+      ],
+    },
+  ],
   projects: [
     {
       name: 'Design Engineering',
@@ -135,6 +173,7 @@ export const AppSidebar = React.memo(function AppSidebar({
         <ScrollArea className="h-full">
           <NavTop items={data.navTop} />
           <NavMain items={data.navMain} />
+          <NavIssues menus={data.navIssues} />
           <NavProjects projects={data.projects} />
         </ScrollArea>
       </SidebarContent>

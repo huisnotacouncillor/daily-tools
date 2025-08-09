@@ -10,8 +10,10 @@ import type {
   Team,
   Project,
   CreateProjectForm,
+  Label,
 } from '@/types';
 import type { CreateTeamForm } from '@/types/team';
+import type { LabelLevel } from '@/types/enum';
 
 // API 基础配置
 const API_BASE_URL = 'http://localhost:8000';
@@ -167,8 +169,30 @@ export const issueAPI = {
 
 // 标签相关 API
 export const labelAPI = {
-  getLabels: async (): Promise<ApiResponse<string[]>> => {
-    return authFetcher('/labels');
+  getLabels: async (params: {
+    level: LabelLevel;
+    name?: string;
+  }): Promise<ApiResponse<Label[]>> => {
+    return authFetcher(
+      `/labels?level=${params.level}&name=${params.name ?? ''}`
+    );
+  },
+  createLabel: async (data: Label): Promise<ApiResponse<Label>> => {
+    return authFetcher('/labels', {
+      method: 'POST',
+      body: JSON.stringify(data),
+    });
+  },
+  updateLabel: async (id: string, data: Label): Promise<ApiResponse<Label>> => {
+    return authFetcher(`/labels/${id}`, {
+      method: 'PUT',
+      body: JSON.stringify(data),
+    });
+  },
+  deleteLabel: async (id: string): Promise<ApiResponse<void>> => {
+    return authFetcher(`/labels/${id}`, {
+      method: 'DELETE',
+    });
   },
 };
 

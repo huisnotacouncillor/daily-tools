@@ -11,7 +11,7 @@ import {
   Plus,
 } from 'lucide-react';
 import { PageLayout } from '@/layouts/page-layout';
-import { Notification } from '@/features/inbox/notification/notification';
+import { Notification } from '@/features/workspace/inbox/notification/notification';
 import { ScrollArea } from '@ui/scroll-area';
 
 // 模拟数据

@@ -4,7 +4,7 @@ import {
   IssueList,
   IssueFilter,
   IssuePanel,
-} from '@features/my-issues';
+} from '@/features/workspace/my-issues';
 import type { Issue } from '@/types';
 import type { IssuePriority, IssueStatus } from '@/types/enum';
 import { initialIssues } from '@/mock/my-issue';
