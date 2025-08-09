@@ -18,14 +18,41 @@ import type { LabelLevel } from '@/types/enum';
 // API 基础配置
 const API_BASE_URL = 'http://localhost:8000';
 
+// URL 参数处理工具函数
+const buildUrlWithParams = (
+  url: string,
+  params?: Record<string, any>
+): string => {
+  if (!params || Object.keys(params).length === 0) {
+    return url;
+  }
+
+  const searchParams = new URLSearchParams();
+
+  Object.entries(params).forEach(([key, value]) => {
+    if (value !== undefined && value !== null && value !== '') {
+      searchParams.append(key, String(value));
+    }
+  });
+
+  const queryString = searchParams.toString();
+  return queryString ? `${url}?${queryString}` : url;
+};
+
 // 通用 fetcher 函数
-const fetcher = async (url: string, options?: RequestInit) => {
-  const response = await fetch(`${API_BASE_URL}${url}`, {
+const fetcher = async (
+  url: string,
+  options?: RequestInit & { params?: Record<string, any> }
+) => {
+  const { params, ...fetchOptions } = options || {};
+  const finalUrl = buildUrlWithParams(url, params);
+
+  const response = await fetch(`${API_BASE_URL}${finalUrl}`, {
     headers: {
       'Content-Type': 'application/json',
-      ...options?.headers,
+      ...fetchOptions?.headers,
     },
-    ...options,
+    ...fetchOptions,
   });
 
   if (!response.ok) {
@@ -41,16 +68,21 @@ const fetcher = async (url: string, options?: RequestInit) => {
 };
 
 // 带认证的 fetcher
-const authFetcher = async (url: string, options?: RequestInit) => {
+const authFetcher = async (
+  url: string,
+  options?: RequestInit & { params?: Record<string, any> }
+) => {
   const token = localStorage.getItem('access_token');
+  const { params, ...fetchOptions } = options || {};
+  const finalUrl = buildUrlWithParams(url, params);
 
-  const response = await fetch(`${API_BASE_URL}${url}`, {
+  const response = await fetch(`${API_BASE_URL}${finalUrl}`, {
     headers: {
       'Content-Type': 'application/json',
       ...(token && { Authorization: `Bearer ${token}` }),
-      ...options?.headers,
+      ...fetchOptions?.headers,
     },
-    ...options,
+    ...fetchOptions,
   });
 
   if (!response.ok) {
@@ -135,7 +167,9 @@ export const projectAPI = {
   getProjects: async (
     workspaceId: string
   ): Promise<ApiResponse<{ projects: Project[]; total: number }>> => {
-    return authFetcher(`/projects?workspace_id=${workspaceId}`);
+    return authFetcher('/projects', {
+      params: { workspace_id: workspaceId },
+    });
   },
   createProject: async (
     project: CreateProjectForm
@@ -150,7 +184,9 @@ export const projectAPI = {
 // 团队相关 API
 export const teamAPI = {
   getTeams: async (workspaceId: string): Promise<ApiResponse<Team[]>> => {
-    return authFetcher(`/teams?workspace_id=${workspaceId}`);
+    return authFetcher('/teams', {
+      params: { workspace_id: workspaceId },
+    });
   },
   createTeam: async (team: CreateTeamForm): Promise<ApiResponse<Team>> => {
     return authFetcher('/teams', {
@@ -169,13 +205,16 @@ export const issueAPI = {
 
 // 标签相关 API
 export const labelAPI = {
-  getLabels: async (params: {
+  getLabels: async (queryParams: {
     level: LabelLevel;
     name?: string;
   }): Promise<ApiResponse<Label[]>> => {
-    return authFetcher(
-      `/labels?level=${params.level}&name=${params.name ?? ''}`
-    );
+    return authFetcher('/labels', {
+      params: {
+        level: queryParams.level,
+        ...(queryParams.name && { name: queryParams.name }),
+      },
+    });
   },
   createLabel: async (data: Label): Promise<ApiResponse<Label>> => {
     return authFetcher('/labels', {
