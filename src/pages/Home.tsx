@@ -17,6 +17,7 @@ import {
   Zap,
   Shield,
   Rocket,
+  Route,
 } from 'lucide-react';
 
 const tools = [
@@ -63,6 +64,21 @@ const tools = [
     ],
     color: 'from-pink-500 to-rose-500',
     badge: 'Creative',
+  },
+  {
+    name: 'Distance Calculator',
+    path: '/distance',
+    icon: Route,
+    description:
+      'Calculate driving distance, estimated time, and highway tolls between two locations.',
+    features: [
+      'AMap geocoding',
+      'Route steps',
+      'Highway distance & fee',
+      'Batch export to Excel',
+    ],
+    color: 'from-indigo-500 to-blue-500',
+    badge: 'New',
   },
   {
     name: 'JWT Token Decoder',

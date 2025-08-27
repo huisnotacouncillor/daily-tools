@@ -5,6 +5,7 @@ import { RegexValidator } from '@/pages/RegexValidator';
 import { JsonFormatter } from '@/pages/JsonFormatter';
 import { ColorConverter } from '@/pages/ColorConverter';
 import { JwtDecoder } from '@/pages/JwtDecoder';
+import { DistanceCalculator } from './pages/Distance';
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
           <Route path="json" element={<JsonFormatter />} />
           <Route path="color" element={<ColorConverter />} />
           <Route path="jwt" element={<JwtDecoder />} />
+          <Route path="distance" element={<DistanceCalculator />} />
         </Route>
       </Routes>
     </Router>

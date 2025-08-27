@@ -196,8 +196,12 @@ export function JwtDecoder() {
 
       <Tabs defaultValue="decoder" className="w-full">
         <TabsList className="grid w-full grid-cols-2">
-          <TabsTrigger value="decoder">Decoder</TabsTrigger>
-          <TabsTrigger value="encoder">Encoder</TabsTrigger>
+          <TabsTrigger value="decoder" className="cursor-pointer">
+            JWT Decoder
+          </TabsTrigger>
+          <TabsTrigger value="encoder" className="cursor-pointer">
+            JWT Encoder
+          </TabsTrigger>
         </TabsList>
 
         {/* JWT Decoder Tab */}
